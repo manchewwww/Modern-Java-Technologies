@@ -9,14 +9,14 @@ public class CourseScheduler {
         for (int i = 0; i < courses.length - 1; i++) {
             int minIndex = i;
             for (int j = i + 1; j < courses.length; j++) {
-                if(courses[minIndex][0] > courses[j][0]) {
+                if (courses[minIndex][0] > courses[j][0]) {
                     minIndex = j;
                 }
-                else if(courses[minIndex][0] == courses[j][0] && courses[minIndex][1] > courses[j][1]) {
+                else if (courses[minIndex][0] == courses[j][0] && courses[minIndex][1] > courses[j][1]) {
                     minIndex = j;
                 }
             }
-            if(minIndex != i) {
+            if (minIndex != i) {
                 swap(courses, i, minIndex);
             }
 
@@ -28,7 +28,7 @@ public class CourseScheduler {
         int counter = 1;
         int lastIndex = startIndex;
         for (int i = startIndex + 1; i < courses.length; i++) {
-            if(courses[i][0] >= courses[lastIndex][1])  {
+            if (courses[i][0] >= courses[lastIndex][1]) {
                 counter++;
                 lastIndex = i;
             }
@@ -37,13 +37,13 @@ public class CourseScheduler {
     }
 
     public static int maxNonOverlappingCourses(int[][] courses) {
-        if(courses.length == 0) {
+        if (courses.length == 0) {
             return 0;
         }
         sortArray(courses);
         int counter = 0;
         for (int i = 0; i < courses.length; i++) {
-            if(courses.length - i > counter) {
+            if (courses.length - i > counter) {
                 counter = findMaxCourses(courses, i);
             }
         }

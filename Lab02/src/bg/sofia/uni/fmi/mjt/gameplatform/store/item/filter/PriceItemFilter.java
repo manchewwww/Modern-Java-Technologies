@@ -8,6 +8,7 @@ public class PriceItemFilter implements ItemFilter {
 
     private final BigDecimal lowerBound;
     private final BigDecimal upperBound;
+
     public PriceItemFilter(BigDecimal lowerBound, BigDecimal upperBound) {
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;

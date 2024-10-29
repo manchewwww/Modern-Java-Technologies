@@ -29,7 +29,7 @@ public final class Bicycle extends Vehicle {
         long hours = seconds / 3600;
         seconds %= 3600;
 
-        if(days >=7) {
+        if (days >= 7) {
             throw new InvalidRentingPeriodException("Bicycle max rental period is 6 days, 23 hours and 59 minutes. ");
         }
         double price = hours * priceManage.pricePerHour() + days * priceManage.pricePerDay();

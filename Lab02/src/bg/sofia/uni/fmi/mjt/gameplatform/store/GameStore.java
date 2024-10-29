@@ -13,7 +13,7 @@ public class GameStore implements StoreAPI {
     private boolean friendsPromoCode;
 
     private void applyDiscount(BigDecimal percentage) {
-        for(StoreItem item : availableItems) {
+        for (StoreItem item : availableItems) {
             item.setPrice(item.getPrice().multiply(percentage));
         }
     }
@@ -39,13 +39,13 @@ public class GameStore implements StoreAPI {
         for (int i = 0; i < availableItems.length; i++) {
             boolean found = true;
             for (ItemFilter itemFilter : itemFilters) {
-                if(!itemFilter.matches(availableItems[i])) {
+                if (!itemFilter.matches(availableItems[i])) {
                     ignoreElements[i] = true;
                     found = false;
                     break;
                 }
             }
-            if(found) {
+            if (found) {
                 count++;
             }
         }
@@ -53,7 +53,7 @@ public class GameStore implements StoreAPI {
         StoreItem[] passFilters = new StoreItem[count];
         int index = 0;
         for (int i = 0; i < ignoreElements.length; i++) {
-            if(!ignoreElements[i]) {
+            if (!ignoreElements[i]) {
                 passFilters[index++] = availableItems[i];
             }
         }
@@ -62,11 +62,11 @@ public class GameStore implements StoreAPI {
 
     @Override
     public void applyDiscount(String promoCode) {
-        if(!firstPromoCode && promoCode.equals("VAN40")) {
+        if (!firstPromoCode && promoCode.equals("VAN40")) {
             firstPromoCode = true;
             applyDiscount(new BigDecimal(0.6));
         }
-        else if(!friendsPromoCode && promoCode.equals("100YO")) {
+        else if (!friendsPromoCode && promoCode.equals("100YO")) {
             friendsPromoCode = true;
             applyDiscount(new BigDecimal(0.0));
         }

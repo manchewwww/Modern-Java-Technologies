@@ -24,7 +24,7 @@ public interface StoreAPI {
     /**
      * Rates a store item.
      *
-     * @param item the item to be rated
+     * @param item   the item to be rated
      * @param rating the rating to be given in the range [1, 5]
      * @return true if the item is successfully rated, false otherwise
      */

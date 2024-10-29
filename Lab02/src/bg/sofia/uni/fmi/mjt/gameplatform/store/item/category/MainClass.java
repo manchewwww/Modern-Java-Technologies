@@ -5,7 +5,7 @@ import bg.sofia.uni.fmi.mjt.gameplatform.store.item.StoreItem;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public abstract class MainClass  implements StoreItem {
+public abstract class MainClass implements StoreItem {
     private String title;
     private BigDecimal price;
     private LocalDateTime releaseDate;

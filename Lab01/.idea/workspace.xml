@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="674976cc-0435-4a53-b1b6-f403c2e0b504" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TextJustifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TextJustifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseScheduler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +31,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/OneDrive/Работен плот/ФМИ/Modern-Java-Technologies/Lab01",
+    "last_opened_file_path": "C:/Users/User/OneDrive/Работен плот/ФМИ/Modern-Java-Technologies/Lab02",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -65,12 +64,23 @@
       <workItem from="1729595956587" duration="113000" />
       <workItem from="1729928368210" duration="553000" />
       <workItem from="1730116295336" duration="19000" />
-      <workItem from="1730221907262" duration="406000" />
+      <workItem from="1730221907262" duration="526000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="GitHub.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
