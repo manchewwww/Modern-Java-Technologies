@@ -11,7 +11,7 @@ public class TextJustifier {
         StringBuilder result = new StringBuilder();
         int wordsCount = end - start + 1;
 
-        if((words.length - 1) == end) {
+        if ((words.length - 1) == end) {
             for (int i = start; i <= end; i++) {
                 result.append(words[i]);
                 if (i != end) {
@@ -47,7 +47,7 @@ public class TextJustifier {
             for (int i = start; i <= end; i++) {
                 result.append(words[i]);
                 int counter = 0;
-                if(i != end) {
+                if (i != end) {
                     while (counter < spacesBetweenWords) {
                         result.append(" ");
                         counter++;
@@ -68,7 +68,7 @@ public class TextJustifier {
 
 
     public static String[] justifyText(String[] words, int maxWidth) {
-        if(words.length == 0 ){
+        if (words.length == 0) {
             return words;
         }
         StringBuilder result = new StringBuilder();
