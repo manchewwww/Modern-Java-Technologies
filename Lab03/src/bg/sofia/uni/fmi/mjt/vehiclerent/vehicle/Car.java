@@ -8,59 +8,41 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public final class Car extends Vehicle {
-    private final static int PRICE_FOR_SEAT = 5;
-
-    private FuelType fuelType;
-    private int numberOfSeats;
-    private PriceManage priceManage;
-    private double pricePerWeek;
-
+    private final VehicleRentalDetails vehicleRentalDetails;
+    private RentalPeriod rentalPeriod;
 
     public Car(String id, String model, FuelType fuelType, int numberOfSeats, double pricePerWeek, double pricePerDay, double pricePerHour) {
         super(id, model);
-        setFuelType(fuelType);
-        setNumberOfSeats(numberOfSeats);
-        setPricePerWeek(pricePerWeek);
-        setPriceManage(new PriceManage(pricePerDay, pricePerHour));
+        vehicleRentalDetails = new VehicleRentalDetails(fuelType, numberOfSeats, pricePerWeek, pricePerDay, pricePerHour);
     }
 
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
+    private double calculatePrice(final RentalPeriod rentalPeriod) {
+        double price =
+                vehicleRentalDetails.getFuelType().getFeePerDay() * rentalPeriod.getDays() +
+                        VehicleRentalDetails.PRICE_FOR_SEAT * vehicleRentalDetails.getNumberOfSeats() +
+                        vehicleRentalDetails.getPricePerWeek() * rentalPeriod.getWeeks() +
+                        vehicleRentalDetails.getPricePerDay() * rentalPeriod.getDays() +
+                        vehicleRentalDetails.getPricePerHour() * rentalPeriod.getHours() +
+                        super.getDriver().ageGroup().getFee();
+
+        return rentalPeriod.getSeconds() != 0 ?
+                price + vehicleRentalDetails.getPricePerHour() + vehicleRentalDetails.getFuelType().getFeePerDay() :
+                price;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
-    }
-
-    public void setPricePerWeek(double pricePerWeek) {
-        this.pricePerWeek = pricePerWeek;
-    }
-
-    public void setPriceManage(PriceManage priceManage) {
-        this.priceManage = priceManage;
+    @Override
+    public void validPeriodOfTime(LocalDateTime startOfRent, LocalDateTime endOfRent) throws InvalidRentingPeriodException {
+        this.rentalPeriod = new RentalPeriod(startOfRent,endOfRent);
+        if (endOfRent.isBefore(startOfRent)) {
+            throw new InvalidRentingPeriodException("End rent period is before start rent period!");
+        }
     }
 
     @Override
     public double calculateRentalPrice(LocalDateTime startOfRent, LocalDateTime endOfRent) throws InvalidRentingPeriodException {
-        if (endOfRent.isBefore(startOfRent)) {
-            throw new InvalidRentingPeriodException("End date is before start date.");
-        }
+        validPeriodOfTime(startOfRent, endOfRent);
 
-        Duration duration = Duration.between(startOfRent, endOfRent);
-        long seconds = duration.getSeconds();
-        int days = (int) seconds / (3600 * 24);
-        seconds %= (3600 * 24);
-        long hours = seconds / 3600;
-        seconds %= 3600;
-        long weeks = days / 7;
-        days %= 7;
-
-        double price = weeks * pricePerWeek + days * priceManage.pricePerDay() + hours *
-                priceManage.pricePerHour() + fuelType.getFeePerDay() * days + numberOfSeats * PRICE_FOR_SEAT +
-                super.getDriver().ageGroup().getFee();
-
-
-        return seconds != 0 ? price + priceManage.pricePerHour() + fuelType.getFeePerDay() : price;
+        return calculatePrice(rentalPeriod);
     }
 
 }

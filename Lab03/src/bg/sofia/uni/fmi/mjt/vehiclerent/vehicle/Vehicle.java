@@ -37,7 +37,7 @@ public abstract sealed class Vehicle permits Bicycle, Car, Caravan {
      */
     public void rent(Driver driver, LocalDateTime startRentTime) {
         if (isRented) {
-            throw new VehicleAlreadyRentedException();
+            throw new VehicleAlreadyRentedException("The vehicle is already rented");
         }
         this.driver = driver;
         this.startRentTime = startRentTime;
@@ -56,13 +56,13 @@ public abstract sealed class Vehicle permits Bicycle, Car, Caravan {
      */
     public void returnBack(LocalDateTime rentalEnd) throws InvalidRentingPeriodException {
         if (!isRented) {
-            throw new VehicleNotRentedException();
+            throw new VehicleNotRentedException("The vehicle is not rented!");
         }
-        if (rentalEnd.isBefore(startRentTime)) {
-            throw new InvalidRentingPeriodException("Renting period is incorrect!");
-        }
+        this.validPeriodOfTime(this.startRentTime, rentalEnd);
         isRented = false;
     }
+
+    public abstract void validPeriodOfTime(LocalDateTime startOfRent, LocalDateTime endOfRent) throws InvalidRentingPeriodException;
 
     /**
      * Used to calculate potential rental price without the vehicle to be rented.
