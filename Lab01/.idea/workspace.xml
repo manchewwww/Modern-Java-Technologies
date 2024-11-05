@@ -5,7 +5,78 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="674976cc-0435-4a53-b1b6-f403c2e0b504" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/CourseScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseScheduler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CourseScheduler/CourseScheduler.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TextJustifier/TextJustifier.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab02-GameStore/Lab02.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab03-VehicleRenting/Lab03.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab04-SocialNetwork/Lab04.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CourseSchedulerCondition.md" beforeDir="false" afterPath="$PROJECT_DIR$/CourseScheduler/CourseSchedulerCondition.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TextJustifierCondition.md" beforeDir="false" afterPath="$PROJECT_DIR$/TextJustifier/TextJustifierCondition.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseScheduler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextJustifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/TextJustifier/src/TextJustifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/GameStore.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/Lab02.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/GameStore.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/StoreAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/StoreItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/category/DLC.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/category/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/category/GameBundle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/category/MainClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/category/Rating.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/filter/ItemFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/filter/PriceItemFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/filter/RatingItemFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/filter/ReleaseDateItemFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab02/src/bg/sofia/uni/fmi/mjt/gameplatform/store/item/filter/TitleItemFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/Lab03.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/Vehicle renting.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/RentalService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/driver/AgeGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/driver/Driver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/exception/InvalidRentingPeriodException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/exception/VehicleAlreadyRentedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/exception/VehicleNotRentedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/Bicycle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/Car.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/Caravan.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/FuelType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/RentalPeriod.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/RentalRate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/Vehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03/src/bg/sofia/uni/fmi/mjt/vehiclerent/vehicle/VehicleRentalDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/Lab04.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/SocialNetwork.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/SocialNetworkImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/exception/UserRegistrationException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/post/Post.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/post/ReactionType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/post/SocialFeedPost.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/profile/DefaultUserProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/profile/Interest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04/src/bg/sofia/uni/fmi/mjt/socialnetwork/profile/UserProfile.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +100,16 @@
     "Application.CourseScheduler.executor": "Run",
     "Application.TextJustifier.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/OneDrive/Работен плот/ФМИ/Modern-Java-Technologies/Lab02",
+    "last_opened_file_path": "C:/Users/User/OneDrive/Работен плот/ФМИ/Modern-Java-Technologies/Lab01",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/User/OneDrive/Работен плот/ФМИ/Modern-Java-Technologies/Lab01/src/Main.java",
+    "onboarding.tips.debug.path": "C:/Users/User/OneDrive/Работен плот/ФМИ/Modern-Java-Technologies/Lab01/TextJustifier/src/Main.java",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -65,6 +137,7 @@
       <workItem from="1729928368210" duration="553000" />
       <workItem from="1730116295336" duration="19000" />
       <workItem from="1730221907262" duration="526000" />
+      <workItem from="1730799715803" duration="299000" />
     </task>
     <servers />
   </component>
