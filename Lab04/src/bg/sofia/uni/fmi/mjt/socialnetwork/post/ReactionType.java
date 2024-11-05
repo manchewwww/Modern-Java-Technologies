@@ -1,4 +1,5 @@
 package bg.sofia.uni.fmi.mjt.socialnetwork.post;
 
-public class ReactionType {
+public enum ReactionType {
+    LIKE, LOVE, ANGRY, LAUGH, SAD
 }
