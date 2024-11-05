@@ -6,7 +6,14 @@ import bg.sofia.uni.fmi.mjt.socialnetwork.post.SocialFeedPost;
 import bg.sofia.uni.fmi.mjt.socialnetwork.profile.Interest;
 import bg.sofia.uni.fmi.mjt.socialnetwork.profile.UserProfile;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class SocialNetworkImpl implements SocialNetwork {
 
@@ -68,7 +75,7 @@ public class SocialNetworkImpl implements SocialNetwork {
 
         UserProfile author = post.getAuthor();
         Set<UserProfile> reachedUsers = new HashSet<>();
-        Set<UserProfile> oneNetworkFriends = getReachedUsers(author);
+        Set<UserProfile> oneNetworkFriends = getOneNetworkUsers(author);
 
         for (UserProfile user : oneNetworkFriends) {
             if (!user.equals(author) && commonInterest(author.getInterests(), user.getInterests())) {
@@ -80,15 +87,12 @@ public class SocialNetworkImpl implements SocialNetwork {
     }
 
     private boolean commonInterest(Collection<Interest> authorInterests, Collection<Interest> otherInterests) {
-        for (Interest interest : otherInterests) {
-            if (authorInterests.contains(interest)) {
-                return true;
-            }
-        }
-        return false;
+        Collection<Interest> commonInterests = new HashSet<>(authorInterests);
+        commonInterests.retainAll(otherInterests);
+        return !commonInterests.isEmpty();
     }
 
-    private Set<UserProfile> getReachedUsers(UserProfile author) {
+    private Set<UserProfile> getOneNetworkUsers(UserProfile author) {
         Set<UserProfile> visited = new HashSet<>();
         Queue<UserProfile> queue = new LinkedList<>();
         queue.add(author);

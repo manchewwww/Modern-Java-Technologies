@@ -8,8 +8,6 @@ import bg.sofia.uni.fmi.mjt.socialnetwork.profile.DefaultUserProfile;
 import bg.sofia.uni.fmi.mjt.socialnetwork.profile.Interest;
 import bg.sofia.uni.fmi.mjt.socialnetwork.profile.UserProfile;
 
-import java.util.Set;
-
 public class Main {
 
     public static void main(String[] args) throws UserRegistrationException {

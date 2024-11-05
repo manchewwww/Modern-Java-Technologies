@@ -1,6 +1,9 @@
 package bg.sofia.uni.fmi.mjt.socialnetwork.profile;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
 
 public class DefaultUserProfile implements UserProfile, Comparable<UserProfile> {
 
@@ -73,8 +76,7 @@ public class DefaultUserProfile implements UserProfile, Comparable<UserProfile> 
 
         if (interests.contains(interest)) {
             return false;
-        }
-        else {
+        } else {
             interests.add(interest);
             return true;
         }
@@ -89,8 +91,7 @@ public class DefaultUserProfile implements UserProfile, Comparable<UserProfile> 
         if (interests.contains(interest)) {
             interests.remove(interest);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -104,16 +105,13 @@ public class DefaultUserProfile implements UserProfile, Comparable<UserProfile> 
     public boolean addFriend(UserProfile userProfile) {
         if (userProfile == null) {
             throw new IllegalArgumentException("User profile is null");
-        }
-        else if (this.equals(userProfile)) {
+        } else if (this.equals(userProfile)) {
             throw new IllegalArgumentException("User profile is the same");
         }
 
-        //here is bug
         if (friends.contains(userProfile)) {
             return false;
-        }
-        else {
+        } else {
             friends.add(userProfile);
             userProfile.addFriend(this);
             return true;
@@ -128,8 +126,7 @@ public class DefaultUserProfile implements UserProfile, Comparable<UserProfile> 
 
         if (!friends.contains(userProfile)) {
             return false;
-        }
-        else {
+        } else {
             friends.remove(userProfile);
             userProfile.unfriend(this);
             return true;

@@ -3,7 +3,11 @@ package bg.sofia.uni.fmi.mjt.socialnetwork.post;
 import bg.sofia.uni.fmi.mjt.socialnetwork.profile.UserProfile;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class SocialFeedPost implements Post {
 
@@ -47,7 +51,7 @@ public class SocialFeedPost implements Post {
         if (userProfile == null) {
             throw new IllegalArgumentException("User profile is null");
         }
-        else if (reactionType == null) {
+        if (reactionType == null) {
             throw new IllegalArgumentException("Reaction type is null");
         }
 
