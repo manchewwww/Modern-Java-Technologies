@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Homework-01-Glovo.iml" filepath="$PROJECT_DIR$/Homework-01-Glovo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Homework-01-GlovoApp.iml" filepath="$PROJECT_DIR$/Homework-01-GlovoApp.iml" />
     </modules>
   </component>
 </project>
