@@ -19,35 +19,3 @@ public record DeliveryInfo(Location deliveryGuyLocation, double price, int estim
         }
     }
 }
-
-//public class DeliveryInfo {
-//
-//    private Location delieryGuyLocation;
-//    private double price;
-//    private int estimatedTime;
-//    private DeliveryType deliveryType;
-//
-//    public DeliveryInfo(Location deliveryGuyLocation, double price, int estimatedTime, DeliveryType deliveryType) {
-//        this.delieryGuyLocation = deliveryGuyLocation;
-//        this.price = price;
-//        this.estimatedTime = estimatedTime;
-//        this.deliveryType = deliveryType;
-//    }
-//
-//    public DeliveryType getDeliveryType() {
-//        return deliveryType;
-//    }
-//
-//    public int getEstimatedTime() {
-//        return estimatedTime;
-//    }
-//
-//    public double getPrice() {
-//        return price;
-//    }
-//
-//    public Location getDelieryGuyLocation() {
-//        return delieryGuyLocation;
-//    }
-//
-//}
