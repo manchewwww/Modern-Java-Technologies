@@ -63,7 +63,7 @@ public class ControlCenterTest {
 //                {'#', '.', 'B', 'R', '.'},
                 new MapEntity(new Location(1, 0), MapEntityType.WALL),
                 new MapEntity(new Location(1, 1), MapEntityType.ROAD),
-                new MapEntity(new Location(1, 2), MapEntityType.DELIVERY_GUY_ON_BIKE),
+                new MapEntity(new Location(1, 2), MapEntityType.DELIVERY_GUY_BIKE),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT),
                 new MapEntity(new Location(1, 4), MapEntityType.ROAD)
             },
@@ -80,7 +80,7 @@ public class ControlCenterTest {
                 new MapEntity(new Location(3, 0), MapEntityType.WALL),
                 new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(3, 2), MapEntityType.ROAD),
-                new MapEntity(new Location(3, 3), MapEntityType.DELIVERY_GUY_IN_CAR),
+                new MapEntity(new Location(3, 3), MapEntityType.DELIVERY_GUY_CAR),
                 new MapEntity(new Location(3, 4), MapEntityType.ROAD)
             },
             {

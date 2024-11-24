@@ -39,11 +39,11 @@ public class ControlCenter implements ControlCenterApi {
                     case 'C' -> MapEntityType.CLIENT;
                     case 'A' -> {
                         suppliers.add(new Location(i, j));
-                        yield MapEntityType.DELIVERY_GUY_IN_CAR;
+                        yield MapEntityType.DELIVERY_GUY_CAR;
                     }
                     case 'B' -> {
                         suppliers.add(new Location(i, j));
-                        yield MapEntityType.DELIVERY_GUY_ON_BIKE;
+                        yield MapEntityType.DELIVERY_GUY_BIKE;
                     }
                     default -> throw new InvalidMapSymbolException(
                         "Symbol in map is invalid: " + mapLayout[i][j] + "in position: x: " + i + ", y: " + j);
@@ -55,8 +55,8 @@ public class ControlCenter implements ControlCenterApi {
 
     private boolean isWalkable(MapEntityType type) {
         return type == MapEntityType.RESTAURANT || type == MapEntityType.ROAD
-            || type == MapEntityType.CLIENT || type == MapEntityType.DELIVERY_GUY_IN_CAR
-            || type == MapEntityType.DELIVERY_GUY_ON_BIKE;
+            || type == MapEntityType.CLIENT || type == MapEntityType.DELIVERY_GUY_CAR
+            || type == MapEntityType.DELIVERY_GUY_BIKE;
     }
 
     private int calculateDistance(Location start, Location end) {
@@ -143,7 +143,7 @@ public class ControlCenter implements ControlCenterApi {
 
             int totalDistance = distanceToRestaurant + distanceToClient;
             DeliveryType deliveryType =
-                mapEntities[supplier.x()][supplier.y()].type() == MapEntityType.DELIVERY_GUY_IN_CAR ? DeliveryType.CAR :
+                mapEntities[supplier.x()][supplier.y()].type() == MapEntityType.DELIVERY_GUY_CAR ? DeliveryType.CAR :
                     DeliveryType.BIKE;
             double priceForDelivery = totalDistance * deliveryType.getPricePerKm();
             int timeForDelivery = totalDistance * deliveryType.getTimePerKm();
