@@ -1,4 +1,5 @@
-package bg.sofia.uni.fmi.mjt.imagekit.detection;
+package bg.sofia.uni.fmi.mjt.imagekit.algorithm.detection;
 
-public class SobelEdgeDetection {
+public class SobelEdgeDetectionTest {
+
 }

@@ -1,4 +1,6 @@
 package bg.sofia.uni.fmi.mjt.imagekit.algorithm.detection;
 
-public class EdgeDetectionAlgorithm {
+import bg.sofia.uni.fmi.mjt.imagekit.algorithm.ImageAlgorithm;
+
+public interface EdgeDetectionAlgorithm extends ImageAlgorithm {
 }

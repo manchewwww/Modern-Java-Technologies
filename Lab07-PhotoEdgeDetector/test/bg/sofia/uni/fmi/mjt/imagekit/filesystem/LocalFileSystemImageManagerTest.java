@@ -1,4 +1,5 @@
-package bg.sofia.uni.fmi.mjt.imagekit;
+package bg.sofia.uni.fmi.mjt.imagekit.filesystem;
 
 public class LocalFileSystemImageManagerTest {
+
 }
