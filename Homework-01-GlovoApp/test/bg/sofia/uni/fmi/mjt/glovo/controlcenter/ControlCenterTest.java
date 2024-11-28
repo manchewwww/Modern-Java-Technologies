@@ -123,40 +123,42 @@ public class ControlCenterTest {
     void testFindOptimalDeliveryGuyCheapest() {
         assertEquals(new DeliveryInfo(new Location(1, 2), 15, 25, DeliveryType.BIKE),
             controlCenter.findOptimalDeliveryGuy(new Location(1, 3), new Location(3, 1), -1, -1,
-                ShippingMethod.CHEAPEST));
+                ShippingMethod.CHEAPEST),
+            "Find optimal delivery guy doesn't work correct with get the cheapest delivery!");
     }
 
     @Test
     void testFindOptimalDeliveryGuyCheapestUnderTime() {
         assertEquals(new DeliveryInfo(new Location(3, 3), 30, 18, DeliveryType.CAR),
             controlCenter.findOptimalDeliveryGuy(new Location(1, 3), new Location(3, 1), -1, 20,
-                ShippingMethod.CHEAPEST));
+                ShippingMethod.CHEAPEST), "Find optimal delivery guy doesn't work correct with cheapest under time!");
     }
 
     @Test
     void testFindOptimalDeliveryGuyCheapestUnderTimeWithNoOneUnderThisTime() {
         assertNull(controlCenter.findOptimalDeliveryGuy(new Location(1, 3), new Location(3, 1), -1, 15,
-            ShippingMethod.CHEAPEST));
+                ShippingMethod.CHEAPEST),
+            "Find optimal delivery guy doesn't work correct with null delivery guy available!");
     }
 
     @Test
     void testFindOptimalDeliveryGuyFastest() {
         assertEquals(new DeliveryInfo(new Location(3, 3), 30, 18, DeliveryType.CAR),
             controlCenter.findOptimalDeliveryGuy(new Location(1, 3), new Location(3, 1), -1, -1,
-                ShippingMethod.FASTEST));
+                ShippingMethod.FASTEST), "Find optimal delivery guy doesn't work correct with fastest delivery!");
     }
 
     @Test
     void testFindOptimalDeliveryGuyFastestUnderPrice() {
         assertEquals(new DeliveryInfo(new Location(1, 2), 15, 25, DeliveryType.BIKE),
             controlCenter.findOptimalDeliveryGuy(new Location(1, 3), new Location(3, 1), 19, -1,
-                ShippingMethod.FASTEST));
+                ShippingMethod.FASTEST), "Find optimal delivery guy doesn't work correct with the fastest under time!");
     }
 
     @Test
     void testFindOptimalDeliveryGuyFastestUnderPriceWithNoOneUnderThisTime() {
         assertNull(controlCenter.findOptimalDeliveryGuy(new Location(1, 3), new Location(3, 1), 1, -1,
-            ShippingMethod.FASTEST));
+            ShippingMethod.FASTEST), "Find optimal delivery guy doesn't work correct when no one is under price!");
     }
 
 }

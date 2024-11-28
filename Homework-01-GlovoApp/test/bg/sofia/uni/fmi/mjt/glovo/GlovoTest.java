@@ -130,7 +130,7 @@ public class GlovoTest {
 //        assertThrows(NoAvailableDeliveryGuyException.class,
 //            () -> glovo.getCheapestDelivery(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
 //                new MapEntity(new Location(2, 3), MapEntityType.RESTAURANT), "KFC"),
-//            "Get cheapest delivery expect exception when no one delivery guy is available");
+//            "Get the cheapest delivery expect exception when no one delivery guy is available");
 //    }
 
     @Test
@@ -138,7 +138,7 @@ public class GlovoTest {
         assertEquals(new Delivery(new Location(3, 1), new Location(1, 3), new Location(3, 3), "KFC", 30, 18),
             glovo.getFastestDelivery(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT), "KFC"),
-            "Get fastest delivery return incorrect answer for delivery");
+            "Get the fastest delivery return incorrect answer for delivery");
     }
 
 //    @Test
@@ -146,7 +146,7 @@ public class GlovoTest {
 //        assertThrows(NoAvailableDeliveryGuyException.class,
 //            () -> glovo.getFastestDelivery(new MapEntity(new Location(3, 1), MapEntityType.Client),
 //                new MapEntity(new Location(2, 3), MapEntityType.Restaurant), "KFC"),
-//            "Get fastest delivery expect exception when no one delivery guy is available");
+//            "Get the fastest delivery expect exception when no one delivery guy is available");
 //    }
 
     @Test
@@ -154,7 +154,7 @@ public class GlovoTest {
         assertThrows(InvalidMaximumPriceForDeliveryException.class,
             () -> glovo.getFastestDeliveryUnderPrice(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT), "KFC", -5),
-            "Price in get fastest delivery under price must be bigger than 0");
+            "Price in get the fastest delivery under price must be bigger than 0");
     }
 
     @Test
@@ -162,7 +162,7 @@ public class GlovoTest {
         assertEquals(new Delivery(new Location(3, 1), new Location(1, 3), new Location(1, 2), "KFC", 15, 25),
             glovo.getFastestDeliveryUnderPrice(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT), "KFC", 20),
-            "Get fastest delivery under price return incorrect answer for delivery");
+            "Get the fastest delivery under price return incorrect answer for delivery");
     }
 
     @Test
@@ -170,7 +170,7 @@ public class GlovoTest {
         assertThrows(NoAvailableDeliveryGuyException.class,
             () -> glovo.getFastestDeliveryUnderPrice(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT), "KFC", 7),
-            "Get fastest delivery under price expect exception when no one delivery guy is available");
+            "Get the fastest delivery under price expect exception when no one delivery guy is available");
     }
 
     @Test
@@ -178,7 +178,7 @@ public class GlovoTest {
         assertThrows(InvalidMaximumTimeForDeliveryException.class,
             () -> glovo.getCheapestDeliveryWithinTimeLimit(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT), "KFC", -5),
-            "Time in get cheapest delivery under time must be bigger than 0");
+            "Time in get the cheapest delivery under time must be bigger than 0");
     }
 
     @Test
@@ -186,7 +186,7 @@ public class GlovoTest {
         assertEquals(new Delivery(new Location(3, 1), new Location(1, 3), new Location(3, 3), "KFC", 30, 18),
             glovo.getCheapestDeliveryWithinTimeLimit(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT), "KFC", 20),
-            "Get cheapest delivery under time return incorrect answer for delivery");
+            "Get the cheapest delivery under time return incorrect answer for delivery");
     }
 
     @Test
@@ -194,7 +194,7 @@ public class GlovoTest {
         assertThrows(NoAvailableDeliveryGuyException.class,
             () -> glovo.getCheapestDeliveryWithinTimeLimit(new MapEntity(new Location(3, 1), MapEntityType.CLIENT),
                 new MapEntity(new Location(1, 3), MapEntityType.RESTAURANT), "KFC", 7),
-            "Get cheapest delivery under time expect exception when no one delivery guy is available");
+            "Get the cheapest delivery under time expect exception when no one delivery guy is available");
     }
 
 }
