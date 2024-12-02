@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class SobelEdgeDetection implements EdgeDetectionAlgorithm {
 
+    private static final int MAX_RANGE_SIZE = 255;
     private final ImageAlgorithm grayscaleAlgorithm;
 
     public SobelEdgeDetection(ImageAlgorithm grayscaleAlgorithm) {
@@ -16,7 +17,7 @@ public class SobelEdgeDetection implements EdgeDetectionAlgorithm {
     private int[][] horizontalSobel(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
-        int[][] horizontalSobelKernel = {
+        final int[][] horizontalSobelKernel = {
             {-1, 0, 1},
             {-2, 0, 2},
             {-1, 0, 1}
@@ -47,7 +48,7 @@ public class SobelEdgeDetection implements EdgeDetectionAlgorithm {
     private int[][] verticalSobel(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
-        int[][] verticalSobelKernel = {
+        final int[][] verticalSobelKernel = {
             {-1, -2, -1},
             {0, 0, 0},
             {1, 2, 1}
@@ -75,8 +76,15 @@ public class SobelEdgeDetection implements EdgeDetectionAlgorithm {
         return verticalSobel;
     }
 
+    private void validateImage(BufferedImage image) {
+        if (image == null) {
+            throw new IllegalArgumentException("image is null");
+        }
+    }
+
     @Override
     public BufferedImage process(BufferedImage image) {
+        validateImage(image);
         BufferedImage grayscaleImage = grayscaleAlgorithm.process(image);
 
         int width = grayscaleImage.getWidth();
@@ -90,7 +98,8 @@ public class SobelEdgeDetection implements EdgeDetectionAlgorithm {
             for (int y = 0; y < height; y++) {
                 int gradientX = horizontalSobel[x][y];
                 int gradientY = verticalSobel[x][y];
-                int magnitude = (int) Math.min(Math.sqrt(gradientX * gradientX + gradientY * gradientY), 255);
+                int magnitude =
+                    (int) Math.min(Math.sqrt(gradientX * gradientX + gradientY * gradientY), MAX_RANGE_SIZE);
                 Color color = new Color(magnitude, magnitude, magnitude);
 
                 edgeImage.setRGB(x, y, color.getRGB());

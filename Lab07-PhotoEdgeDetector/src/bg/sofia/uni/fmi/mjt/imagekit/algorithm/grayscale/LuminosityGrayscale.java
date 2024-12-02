@@ -12,8 +12,15 @@ public class LuminosityGrayscale implements GrayscaleAlgorithm {
     public LuminosityGrayscale() {
     }
 
+    private void validateImage(BufferedImage image) {
+        if (image == null) {
+            throw new IllegalArgumentException("image is null");
+        }
+    }
+
     @Override
     public BufferedImage process(BufferedImage image) {
+        validateImage(image);
         BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         for (int x = 0; x < image.getWidth(); x++) {

@@ -29,7 +29,7 @@ public class Main {
         manager.saveImage(greyCar, new File("resources", "greyCar.jpg"));
         manager.saveImage(greyKitten, new File("resources", "greyKitten.png"));
         manager.saveImage(edgeCar, new File("resources", "edgeCar.jpg"));
-        manager.saveImage(edgeKitten, new File("resources", "edgeKitten.jpg"));
+        manager.saveImage(edgeKitten, new File("resources", "edgeKitten.png"));
     }
 
 }
