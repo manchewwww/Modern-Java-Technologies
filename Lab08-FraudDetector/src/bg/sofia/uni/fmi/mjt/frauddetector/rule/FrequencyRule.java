@@ -30,7 +30,10 @@ public class FrequencyRule implements Rule {
 
     @Override
     public boolean applicable(List<Transaction> transactions) {
-        if (transactions == null || transactions.isEmpty()) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Transactions must not be null");
+        }
+        if (transactions.isEmpty()) {
             return false;
         }
         if (transactions.size() < transactionCountThreshold) {
