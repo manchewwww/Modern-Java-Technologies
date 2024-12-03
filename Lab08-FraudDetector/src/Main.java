@@ -1,17 +1,35 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import bg.sofia.uni.fmi.mjt.frauddetector.analyzer.TransactionAnalyzer;
+import bg.sofia.uni.fmi.mjt.frauddetector.analyzer.TransactionAnalyzerImpl;
+import bg.sofia.uni.fmi.mjt.frauddetector.rule.FrequencyRule;
+import bg.sofia.uni.fmi.mjt.frauddetector.rule.LocationsRule;
+import bg.sofia.uni.fmi.mjt.frauddetector.rule.Rule;
+import bg.sofia.uni.fmi.mjt.frauddetector.rule.SmallTransactionsRule;
+import bg.sofia.uni.fmi.mjt.frauddetector.rule.ZScoreRule;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
+import java.time.Period;
+import java.util.List;
+
 public class Main {
 
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String... args) throws FileNotFoundException {
+        String filePath = "resources//dataset.csv";
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Reader reader = new FileReader(filePath);
+        List<Rule> rules = List.of(
+            new ZScoreRule(1.5, 0.3),
+            new LocationsRule(3, 0.4),
+            new FrequencyRule(4, Period.ofWeeks(4), 0.25),
+            new SmallTransactionsRule(1, 10.20, 0.05)
+        );
+
+        TransactionAnalyzer analyzer = new TransactionAnalyzerImpl(reader, rules);
+
+        System.out.println(analyzer.allAccountIDs());
+        System.out.println(analyzer.allTransactionsByUser(analyzer.allTransactions().getFirst().accountID()));
+        System.out.println(analyzer.accountsRisk());
     }
 
 }
