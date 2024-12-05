@@ -14,8 +14,8 @@ public class SmallTransactionsRule implements Rule {
         if (countThreshold < 1) {
             throw new IllegalArgumentException("Count threshold must be greater than 0");
         }
-        if (amountThreshold < 0) {
-            throw new IllegalArgumentException("Amount threshold must be non-negative");
+        if (amountThreshold <= 0.0) {
+            throw new IllegalArgumentException("Amount threshold must be greater than 0");
         }
         if (weight < 0.0 || weight > 1.0) {
             throw new IllegalArgumentException("Weight must be between 0.0 and 1.0");
@@ -28,7 +28,10 @@ public class SmallTransactionsRule implements Rule {
 
     @Override
     public boolean applicable(List<Transaction> transactions) {
-        if (transactions == null || transactions.isEmpty()) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Transactions cannot be null");
+        }
+        if (transactions.isEmpty()) {
             return false;
         }
         if (transactions.size() < countThreshold) {

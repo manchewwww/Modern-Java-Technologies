@@ -4,6 +4,7 @@ import bg.sofia.uni.fmi.mjt.frauddetector.transaction.Transaction;
 
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAmount;
+import java.util.Comparator;
 import java.util.List;
 
 public class FrequencyRule implements Rule {
@@ -40,16 +41,22 @@ public class FrequencyRule implements Rule {
             return false;
         }
 
-        LocalDateTime timeNow = LocalDateTime.now();
-        LocalDateTime windowStart = timeNow.minus(timeWindow);
+        for (Transaction transaction : transactions) {
+            LocalDateTime windowStart = transaction.transactionDate();
+            LocalDateTime windowEnd = windowStart.plus(timeWindow);
 
-        long count =
-            transactions.stream()
-                .filter(transaction -> transaction.transactionDate().isAfter(windowStart) &&
-                    transaction.transactionDate().isBefore(timeNow))
-                .count();
+            long count =
+                transactions.stream()
+                    .filter(trans -> !(trans.transactionDate().isAfter(windowEnd) ||
+                        trans.transactionDate().isBefore(windowStart)))
+                    .count();
 
-        return count >= transactionCountThreshold;
+            if (count >= transactionCountThreshold) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

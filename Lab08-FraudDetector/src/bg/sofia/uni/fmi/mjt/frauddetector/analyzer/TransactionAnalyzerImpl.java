@@ -6,13 +6,9 @@ import bg.sofia.uni.fmi.mjt.frauddetector.transaction.Transaction;
 
 import java.io.BufferedReader;
 import java.io.Reader;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -30,6 +26,10 @@ public class TransactionAnalyzerImpl implements TransactionAnalyzer {
             throw new IllegalArgumentException("rules is null");
         }
 
+        double rulesRisk = rules.stream().mapToDouble(Rule::weight).sum();
+        if (rulesRisk != 1) {
+            throw new IllegalArgumentException("rulesRisk is " + rulesRisk);
+        }
         this.rules = rules;
 
         var input = new BufferedReader(reader);
@@ -47,7 +47,7 @@ public class TransactionAnalyzerImpl implements TransactionAnalyzer {
 
     @Override
     public List<Transaction> allTransactions() {
-        return Collections.unmodifiableList(transactions);
+        return transactions;
     }
 
     @Override
@@ -91,17 +91,10 @@ public class TransactionAnalyzerImpl implements TransactionAnalyzer {
             return 0.0;
         }
 
-        double riskRating =
-            rules.stream()
-                .filter(rule -> rule.applicable(transactionsFromUser))
-                .mapToDouble(Rule::weight)
-                .sum();
-
-        if (riskRating > 1 || riskRating < 0) {
-            throw new IllegalArgumentException("Risk rating must be between 0 and 1");
-        }
-
-        return riskRating;
+        return rules.stream()
+            .filter(rule -> rule.applicable(transactionsFromUser))
+            .mapToDouble(Rule::weight)
+            .sum();
     }
 
     @Override
@@ -110,16 +103,12 @@ public class TransactionAnalyzerImpl implements TransactionAnalyzer {
             allAccountIDs().stream()
                 .collect(Collectors.toMap(accountID -> accountID, this::accountRating));
 
-        TreeMap<String, Double> sortedMap = new TreeMap<>(new Comparator<String>() {
-
-            @Override
-            public int compare(String o1, String o2) {
-                int compareRisk = accountsRisks.get(o2).compareTo(accountsRisks.get(o1));
-                if (compareRisk != 0) {
-                    return compareRisk;
-                }
-                return o1.compareTo(o2);
+        TreeMap<String, Double> sortedMap = new TreeMap<>((o1, o2) -> {
+            int compareRisk = accountsRisks.get(o2).compareTo(accountsRisks.get(o1));
+            if (compareRisk != 0) {
+                return compareRisk;
             }
+            return o1.compareTo(o2);
         });
         sortedMap.putAll(accountsRisks);
         return sortedMap;

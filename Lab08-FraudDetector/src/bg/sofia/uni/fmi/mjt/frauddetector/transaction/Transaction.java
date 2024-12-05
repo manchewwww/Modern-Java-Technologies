@@ -8,6 +8,10 @@ public record Transaction(String transactionID, String accountID, double transac
 
     public static Transaction of(String line) {
         final String[] tokens = line.split(",");
+        final int lengthOfTokens = 6;
+        if (tokens.length != lengthOfTokens) {
+            throw new IllegalArgumentException("Invalid transaction line: " + line);
+        }
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

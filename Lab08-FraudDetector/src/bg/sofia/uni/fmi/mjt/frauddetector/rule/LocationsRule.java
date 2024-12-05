@@ -24,7 +24,10 @@ public class LocationsRule implements Rule {
 
     @Override
     public boolean applicable(List<Transaction> transactions) {
-        if (transactions == null || transactions.isEmpty()) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Transactions cannot be null");
+        }
+        if (transactions.isEmpty()) {
             return false;
         }
         if (transactions.size() < threshold) {

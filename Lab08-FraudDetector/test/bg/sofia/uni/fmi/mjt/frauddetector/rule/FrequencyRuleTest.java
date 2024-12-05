@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,7 +17,7 @@ public class FrequencyRuleTest {
     @Test
     public void testConstructorWithInvalidTransactionCountThreshold() {
         assertThrows(IllegalArgumentException.class, () -> new FrequencyRule(0, Duration.ofMinutes(10), 0.1),
-            "When transactionCountThreshold is lower than 1 an IllegalArgumentException should be thrown");
+            "When transactionCountThreshold is less than 1 an IllegalArgumentException should be thrown");
     }
 
     @Test
@@ -30,7 +29,7 @@ public class FrequencyRuleTest {
     @Test
     public void testConstructorWithInvalidWeight() {
         assertThrows(IllegalArgumentException.class, () -> new FrequencyRule(2, Duration.ofMinutes(10), 1.5),
-            "When weight is lower than 0 or bigger than 1 an IllegalArgumentException should be thrown");
+            "When weight is less than 0 or greater than 1 an IllegalArgumentException should be thrown");
     }
 
     @Test
@@ -51,17 +50,17 @@ public class FrequencyRuleTest {
     }
 
     @Test
-    public void testNonApplicableWithLowerTransactionsSizeFromTransactionCountThreshold() {
+    public void testNonApplicableWithLessTransactionsSizeThanTransactionCountThreshold() {
         Rule rule = new FrequencyRule(4, Duration.ofMinutes(1), 1);
 
         LocalDateTime now = LocalDateTime.now();
         List<Transaction> transactions = List.of(
             new Transaction("1", "account1", 10.0, now.minusMinutes(2), "San diego", Channel.ATM),
-            new Transaction("2", "account2", 20.0, now.minusMinutes(1), "San diego", Channel.ATM)
+            new Transaction("2", "account1", 20.0, now.minusMinutes(1), "San diego", Channel.ATM)
         );
 
         assertFalse(rule.applicable(transactions),
-            "Frequency rule should not be applicable when transaction in period is lower than transactionCountThreshold");
+            "Frequency rule should not be applicable when transaction in period is less than transactionCountThreshold");
     }
 
     @Test
@@ -71,11 +70,11 @@ public class FrequencyRuleTest {
         LocalDateTime now = LocalDateTime.now();
         List<Transaction> transactions = List.of(
             new Transaction("1", "account1", 10.0, now.minusMinutes(2), "San diego", Channel.ATM),
-            new Transaction("2", "account2", 20.0, now.minusMinutes(1), "San diego", Channel.ATM)
+            new Transaction("2", "account1", 20.0, now.minusMinutes(1), "San diego", Channel.ATM)
         );
 
         assertTrue(rule.applicable(transactions),
-            "Frequency rule should be applicable when transaction in period is bigger or equal to transactionCountThreshold");
+            "Frequency rule should be applicable when transaction in period is greater or equal to transactionCountThreshold");
     }
 
     @Test
@@ -84,11 +83,11 @@ public class FrequencyRuleTest {
 
         LocalDateTime now = LocalDateTime.now();
         List<Transaction> transactions = List.of(
-            new Transaction("1", "account1", 10.0, now.minusMinutes(2), "San diego", Channel.ATM),
-            new Transaction("2", "account2", 20.0, now.minusMinutes(1), "San diego", Channel.ATM)
+            new Transaction("1", "account1", 10.0, now.minusMinutes(5), "San diego", Channel.ATM),
+            new Transaction("2", "account1", 20.0, now.minusMinutes(1), "San diego", Channel.ATM)
         );
 
         assertFalse(rule.applicable(transactions),
-            "Frequency rule should not be applicable when transaction in period is lower than transactionCountThreshold");
+            "Frequency rule should not be applicable when transaction in period is less than transactionCountThreshold");
     }
 }

@@ -1,6 +1,5 @@
 package bg.sofia.uni.fmi.mjt.frauddetector.transaction;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -9,6 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TransactionTest {
+
+    @Test
+    public void testTransactionFromInvalidLine() {
+        assertThrows(IllegalArgumentException.class,
+            () -> Transaction.of("TX000001,AC0012814.09,2023-04-11 16:29:14,San Diego,ATM"), "Line is invalid");
+
+    }
 
     @Test
     public void testTransactionSetWithATMChannel() {

@@ -23,35 +23,33 @@ public class ZScoreRule implements Rule {
 
     @Override
     public boolean applicable(List<Transaction> transactions) {
-        if (transactions == null || transactions.isEmpty()) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Transactions cannot be null");
+        }
+        if (transactions.isEmpty()) {
             return false;
         }
 
-        double averageAmount =
-            transactions.stream()
+        double averageAmount = transactions.stream()
                 .mapToDouble(Transaction::transactionAmount)
                 .average().orElse(0);
 
-        double variance =
-            transactions.stream()
+        double variance = transactions.stream()
                 .mapToDouble(Transaction::transactionAmount)
                 .map(amount -> Math.pow(amount - averageAmount, 2))
                 .average()
                 .orElse(0);
 
         double standardDeviation = Math.sqrt(variance);
-
         if (standardDeviation == 0) {
             return false;
         }
 
-        long zScores =
-            transactions.stream()
+        long zScores = transactions.stream()
                 .mapToDouble(Transaction::transactionAmount)
                 .map(amount -> (amount - averageAmount) / standardDeviation)
                 .filter(zScore ->  zScore > zScoreThreshold)
                 .count();
-
         return zScores > 0;
     }
 
