@@ -22,7 +22,6 @@ public class SobelEdgeDetectionTest {
 
     @BeforeEach
     void setUp() {
-        // Mock the grayscale algorithm
         mockGrayscaleAlgorithm = mock(ImageAlgorithm.class);
         sobelEdgeDetection = new SobelEdgeDetection(mockGrayscaleAlgorithm);
     }
