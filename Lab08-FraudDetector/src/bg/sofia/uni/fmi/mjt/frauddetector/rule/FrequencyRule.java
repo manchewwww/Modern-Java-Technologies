@@ -4,7 +4,6 @@ import bg.sofia.uni.fmi.mjt.frauddetector.transaction.Transaction;
 
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAmount;
-import java.util.Comparator;
 import java.util.List;
 
 public class FrequencyRule implements Rule {
