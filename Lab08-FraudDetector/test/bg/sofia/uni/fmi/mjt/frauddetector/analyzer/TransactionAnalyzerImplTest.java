@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TransactionAnalyzerImplTest {
 
+    private static Reader reader;
     private static TransactionAnalyzerImpl transactionAnalyzer;
 
     @BeforeAll
@@ -52,7 +53,7 @@ public class TransactionAnalyzerImplTest {
             4,account1,20.0,2023-12-04 10:03:00,Rome,ATM
             """;
 
-        Reader reader = new StringReader(inputData);
+        reader = new StringReader(inputData);
 
         transactionAnalyzer = new TransactionAnalyzerImpl(reader, rules);
     }
@@ -66,7 +67,7 @@ public class TransactionAnalyzerImplTest {
     @Test
     public void testCreationWithInvalidRules() {
         assertThrows(IllegalArgumentException.class,
-            () -> new TransactionAnalyzerImpl(new FileReader("resources//dataset.csv"), null),
+            () -> new TransactionAnalyzerImpl(reader, null),
             "When rules is null an InvalidArgumentException should be thrown");
     }
 
@@ -80,7 +81,7 @@ public class TransactionAnalyzerImplTest {
         );
 
         assertThrows(IllegalArgumentException.class,
-            () -> new TransactionAnalyzerImpl(new FileReader("resources//dataset.csv"), rules),
+            () -> new TransactionAnalyzerImpl(reader, rules),
             "When rules weight is different form 1 an InvalidArgumentException should be thrown");
     }
 
