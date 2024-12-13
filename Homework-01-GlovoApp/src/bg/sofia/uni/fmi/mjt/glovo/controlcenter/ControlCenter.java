@@ -19,11 +19,13 @@ public class ControlCenter implements ControlCenterApi {
 
     private final MapEntity[][] mapEntities;
     private final List<Location> suppliers;
+    private final BFS bfs;
 
     public ControlCenter(char[][] mapLayout) {
         mapEntities = new MapEntity[mapLayout.length][mapLayout[0].length];
         suppliers = new ArrayList<>();
         parseMap(mapLayout);
+        bfs = new BFS(mapEntities);
     }
 
     @Override
@@ -95,7 +97,6 @@ public class ControlCenter implements ControlCenterApi {
 
     private void addDeliveryInfoSet(Set<DeliveryInfo> deliveryInfoSet, Location restaurantLocation,
                                     Location clientLocation, double maxPrice, int maxTime) {
-        BFS bfs = new BFS(mapEntities);
         for (Location supplier : suppliers) {
             int distanceToRestaurant = bfs.searchPathFromStartToEnd(supplier, restaurantLocation);
             if (distanceToRestaurant == -1) {
