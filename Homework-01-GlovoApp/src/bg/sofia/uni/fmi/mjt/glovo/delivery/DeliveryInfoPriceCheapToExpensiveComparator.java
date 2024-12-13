@@ -10,10 +10,12 @@ public class DeliveryInfoPriceCheapToExpensiveComparator implements Comparator<D
         if (comparePrice != 0) {
             return comparePrice;
         }
+
         int compareTime = Integer.compare(o1.estimatedTime(), o2.estimatedTime());
         if (compareTime != 0) {
             return compareTime;
         }
+
         return o1.deliveryType().compareTo(o2.deliveryType());
     }
 
