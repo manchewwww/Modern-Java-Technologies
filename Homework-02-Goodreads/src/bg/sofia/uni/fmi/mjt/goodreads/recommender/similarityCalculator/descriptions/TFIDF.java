@@ -9,6 +9,7 @@ import java.util.*;
 public class TFIDF implements SimilarityCalculator {
 
     public TFIDF(Set<Book> books, TextTokenizer tokenizer) {
+        a
     }
 
     @Override
