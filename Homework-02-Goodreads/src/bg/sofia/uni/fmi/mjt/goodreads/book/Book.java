@@ -41,7 +41,7 @@ public record Book(
 
         return new Book(tokens[iDIndex], tokens[titleIndex], tokens[authorIndex], tokens[descriptionIndex],
             genres, Double.parseDouble(tokens[ratingIndex]),
-            Integer.parseInt(tokens[ratingCountIndex]), tokens[uRLIndex]);
+            Integer.parseInt(tokens[ratingCountIndex].replaceAll(",", "")), tokens[uRLIndex]);
     }
 
 }

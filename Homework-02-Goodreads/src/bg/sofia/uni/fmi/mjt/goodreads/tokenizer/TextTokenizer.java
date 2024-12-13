@@ -3,6 +3,7 @@ package bg.sofia.uni.fmi.mjt.goodreads.tokenizer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,7 +21,17 @@ public class TextTokenizer {
     }
 
     public List<String> tokenize(String input) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (input == null) {
+            throw new IllegalArgumentException("Input cannot be null");
+        }
+        if (input.isBlank()) {
+            throw new IllegalArgumentException("Input cannot be empty");
+        }
+
+        return Arrays.stream(input.replaceAll(",", "").split(" "))
+            .map(String::toLowerCase)
+            .filter(w -> !stopwords.contains(w) && !w.isEmpty())
+            .toList();
     }
 
     public Set<String> stopwords() {
