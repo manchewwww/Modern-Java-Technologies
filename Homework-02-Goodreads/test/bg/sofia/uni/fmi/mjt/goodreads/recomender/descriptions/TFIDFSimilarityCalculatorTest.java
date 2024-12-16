@@ -2,23 +2,21 @@ package bg.sofia.uni.fmi.mjt.goodreads.recomender.descriptions;
 
 import bg.sofia.uni.fmi.mjt.goodreads.BookLoader;
 import bg.sofia.uni.fmi.mjt.goodreads.book.Book;
-import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.descriptions.TFIDF;
+import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.descriptions.TFIDFSimilarityCalculator;
 import bg.sofia.uni.fmi.mjt.goodreads.tokenizer.TextTokenizer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TFIDFTest {
+public class TFIDFSimilarityCalculatorTest {
 
-    static TFIDF tfidf;
+    static TFIDFSimilarityCalculator tfidf;
 
     @BeforeAll
     static void setUpBeforeClass() {
@@ -39,7 +37,7 @@ public class TFIDFTest {
         TextTokenizer tokenizer = new TextTokenizer(new StringReader(stopWordsInput));
         Set<Book> books = BookLoader.load(new StringReader(booksInput));
 
-        tfidf = new TFIDF(books, tokenizer);
+        tfidf = new TFIDFSimilarityCalculator(books, tokenizer);
     }
 
     @Test
@@ -112,5 +110,32 @@ public class TFIDFTest {
 
         assertEquals(result, tfidf.computeTFIDF(book), "ComputeTFIDF return incorrect result");
     }
+
+    @Test
+    void testCalculateSimilarity() {
+        Book book1 = Book.of(
+            new String[] {"0",
+                "Title",
+                "Author",
+                "Big meat after training with",
+                "['Classics', 'Fiction', 'Historical Fiction', 'School', 'Literature', 'Young Adult', 'Historical']"
+                , "4.27",
+                "5,691,311",
+                "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
+            });
+        Book book2 = Book.of(
+            new String[] {"0",
+                "Title1",
+                "Author1",
+                "Big fast food about before",
+                "['Classics', 'Fiction', 'Historical Fiction', 'School', 'Literature', 'Young Adult', 'Historical']"
+                , "4.27",
+                "5,691,311",
+                "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
+            });
+
+        assertEquals(0.03566269721238933, tfidf.calculateSimilarity(book1, book2),
+            "CalculateSimilarity return incorrect result");
+   }
 
 }
