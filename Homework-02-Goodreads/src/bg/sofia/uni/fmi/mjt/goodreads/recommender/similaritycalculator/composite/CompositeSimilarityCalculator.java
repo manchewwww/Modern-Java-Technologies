@@ -4,16 +4,12 @@ import bg.sofia.uni.fmi.mjt.goodreads.book.Book;
 import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.SimilarityCalculator;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class CompositeSimilarityCalculator implements SimilarityCalculator {
 
     private final Map<SimilarityCalculator, Double> similarityCalculatorMap;
 
     public CompositeSimilarityCalculator(Map<SimilarityCalculator, Double> similarityCalculatorMap) {
-        if (similarityCalculatorMap == null) {
-            throw new IllegalArgumentException("Similarity calculator map is null");
-        }
         this.similarityCalculatorMap = similarityCalculatorMap;
     }
 
