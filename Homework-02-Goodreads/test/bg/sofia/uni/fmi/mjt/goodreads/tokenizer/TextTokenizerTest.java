@@ -14,7 +14,7 @@ public class TextTokenizerTest {
     private static TextTokenizer tokenizer;
 
     @BeforeAll
-    static void setUpBeforeClass(){
+    static void setUp(){
         String input = """
             a
             about

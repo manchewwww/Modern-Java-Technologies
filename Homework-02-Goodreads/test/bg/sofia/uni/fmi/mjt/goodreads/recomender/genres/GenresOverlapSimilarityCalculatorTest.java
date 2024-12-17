@@ -16,7 +16,7 @@ public class GenresOverlapSimilarityCalculatorTest {
     static Book secondBook;
 
     @BeforeAll
-    static void setUpBeforeClass() throws Exception {
+    static void setUp() throws Exception {
         firstBook = Book.of(
             new String[] {"0",
                 "Title",
@@ -70,7 +70,7 @@ public class GenresOverlapSimilarityCalculatorTest {
     }
 
     @Test
-    public void testSimilarityWithEmptyGenresBook() {
+    public void testSimilarityWithEmptyGenresSecondBook() {
         Book emptyBook = Book.of(
             new String[] {"4",
                 "Title3",
@@ -83,6 +83,23 @@ public class GenresOverlapSimilarityCalculatorTest {
             });
 
         assertEquals(0, similarityCalculator.calculateSimilarity(firstBook, emptyBook),
+            "When book genres are empty of other program should return 1");
+    }
+
+    @Test
+    public void testSimilarityWithEmptyGenresFirstBook() {
+        Book emptyBook = Book.of(
+            new String[] {"4",
+                "Title3",
+                "Author3",
+                "Big meat after training with",
+                "[]"
+                , "4.27",
+                "5,691,311",
+                "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
+            });
+
+        assertEquals(0, similarityCalculator.calculateSimilarity(emptyBook, secondBook),
             "When book genres are empty of other program should return 1");
     }
 

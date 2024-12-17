@@ -19,7 +19,7 @@ public class TFIDFSimilarityCalculatorTest {
     static TFIDFSimilarityCalculator tfidf;
 
     @BeforeAll
-    static void setUpBeforeClass() {
+    static void setUp() {
         String stopWordsInput = """
             a
             about
