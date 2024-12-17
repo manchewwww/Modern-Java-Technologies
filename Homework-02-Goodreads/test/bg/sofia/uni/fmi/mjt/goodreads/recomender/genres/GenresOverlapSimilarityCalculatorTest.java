@@ -16,7 +16,7 @@ public class GenresOverlapSimilarityCalculatorTest {
     static Book secondBook;
 
     @BeforeAll
-    static void setUp() throws Exception {
+    static void setUp() {
         firstBook = Book.of(
             new String[] {"0",
                 "Title",
