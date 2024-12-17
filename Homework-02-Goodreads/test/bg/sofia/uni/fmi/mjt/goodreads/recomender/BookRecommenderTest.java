@@ -8,7 +8,6 @@ import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.genres.Ge
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
