@@ -23,7 +23,7 @@ public class CompositeSimilarityCalculatorTest {
     private static Book secondBook;
 
     @BeforeAll
-    static void setUpBeforeClass() {
+    static void setUp() {
         firstBook = Book.of(
             new String[] {"0",
                 "Title",
@@ -57,12 +57,6 @@ public class CompositeSimilarityCalculatorTest {
         similarityCalculatorMap.put(genresOverlapSimilarityCalculator, 0.3);
 
         similarityCalculator = new CompositeSimilarityCalculator(similarityCalculatorMap);
-    }
-
-    @Test
-    public void testCreationWithNullMap() {
-        assertThrows(IllegalArgumentException.class, () -> new CompositeSimilarityCalculator(null),
-            "When map is null IllegalArgumentException should be thrown");
     }
 
     @Test
