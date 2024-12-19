@@ -14,6 +14,15 @@ public record Book(
     String URL
 ) {
 
+    static final int ID_INDEX = 0;
+    static final int TITLE_INDEX = 1;
+    static final int AUTHOR_INDEX = 2;
+    static final int DESCRIPTION_INDEX = 3;
+    static final int GENRES_INDEX = 4;
+    static final int RATING_INDEX = 5;
+    static final int RATING_COUNT_INDEX = 6;
+    static final int URL_INDEX = 7;
+
     public static Book of(String[] tokens) {
         final int tokensSize = 8;
         if (tokens == null) {
@@ -23,25 +32,16 @@ public record Book(
             throw new IllegalArgumentException("Tokens size should be " + tokensSize);
         }
 
-        final int iDIndex = 0;
-        final int titleIndex = 1;
-        final int authorIndex = 2;
-        final int descriptionIndex = 3;
-        final int genresIndex = 4;
-        final int ratingIndex = 5;
-        final int ratingCountIndex = 6;
-        final int uRLIndex = 7;
-
         List<String> genres =
-            Arrays.stream(tokens[genresIndex].substring(1, tokens[genresIndex].length() - 1).split(","))
+            Arrays.stream(tokens[GENRES_INDEX].substring(1, tokens[GENRES_INDEX].length() - 1).split(","))
                 .map(s -> s.replaceAll("'", ""))
                 .map(String::trim)
                 .filter(s -> !s.isBlank())
                 .toList();
 
-        return new Book(tokens[iDIndex], tokens[titleIndex], tokens[authorIndex], tokens[descriptionIndex],
-            genres, Double.parseDouble(tokens[ratingIndex]),
-            Integer.parseInt(tokens[ratingCountIndex].replaceAll(",", "")), tokens[uRLIndex]);
+        return new Book(tokens[ID_INDEX], tokens[TITLE_INDEX], tokens[AUTHOR_INDEX], tokens[DESCRIPTION_INDEX],
+            genres, Double.parseDouble(tokens[RATING_INDEX]),
+            Integer.parseInt(tokens[RATING_COUNT_INDEX].replaceAll(",", "")), tokens[URL_INDEX]);
     }
 
 }
