@@ -24,9 +24,6 @@ public class TextTokenizer {
         if (input == null) {
             throw new IllegalArgumentException("Input cannot be null");
         }
-        if (input.isBlank()) {
-            throw new IllegalArgumentException("Input cannot be empty");
-        }
 
         return Arrays.stream(input.replaceAll(",", "").split(" "))
             .map(String::toLowerCase)

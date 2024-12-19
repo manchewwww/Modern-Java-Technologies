@@ -32,12 +32,6 @@ public class TextTokenizerTest {
     }
 
     @Test
-    public void testTokenizeWithEmptyInput() {
-        assertThrows(IllegalArgumentException.class, () -> tokenizer.tokenize(" "),
-            "When input is empty tokenize should thrown IllegalArgumentException");
-    }
-
-    @Test
     public void testTokenize() {
         String input = "I learn about programming after math";
         List<String> result = List.of("i", "learn", "programming", "math");
