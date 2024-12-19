@@ -1,6 +1,6 @@
-package bg.sofia.uni.fmi.mjt.sentimentnalyzer;
+package bg.sofia.uni.fmi.mjt.sentimentanalyzer;
 
-import bg.sofia.uni.fmi.mjt.sentimentnalyzer.exceptions.SentimentAnalysisException;
+import bg.sofia.uni.fmi.mjt.sentimentanalyzer.exceptions.SentimentAnalysisException;
 
 import java.io.Reader;
 import java.util.Map;

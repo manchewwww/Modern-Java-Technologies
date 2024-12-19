@@ -1,4 +1,4 @@
-package bg.sofia.uni.fmi.mjt.sentimentnalyzer;
+package bg.sofia.uni.fmi.mjt.sentimentanalyzer;
 
 public enum SentimentScore {
     VERY_NEGATIVE(-5, "Very Negative"),

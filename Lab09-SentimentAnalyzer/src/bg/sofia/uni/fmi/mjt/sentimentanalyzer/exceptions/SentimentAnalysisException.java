@@ -1,4 +1,4 @@
-package bg.sofia.uni.fmi.mjt.sentimentnalyzer.exceptions;
+package bg.sofia.uni.fmi.mjt.sentimentanalyzer.exceptions;
 
 public class SentimentAnalysisException extends RuntimeException {
 
