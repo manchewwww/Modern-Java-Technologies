@@ -24,27 +24,32 @@ public class BookRecommender implements BookRecommenderAPI {
     public SortedMap<Book, Double> recommendBooks(Book origin, int maxN) {
         if (origin == null) {
             throw new IllegalArgumentException("origin is null");
-        }
-        if (maxN <= 0) {
+        } else if (maxN <= 0) {
             throw new IllegalArgumentException("maxN is negative");
         }
 
-        return initialBooks.stream()
+        Map<Book, Double> similarityScores = initialBooks.stream()
             .collect(Collectors.toMap(
                 book -> book,
                 book -> similarityCalculator.calculateSimilarity(origin, book)
             ))
             .entrySet().stream()
-            .sorted(Map.Entry.<Book, Double>comparingByValue().reversed())
+            .sorted(Map.Entry.<Book, Double>comparingByValue(Comparator.reverseOrder())
+                .thenComparing(Map.Entry.comparingByKey(Comparator.comparing(Book::title))))
             .limit(maxN)
-            .collect(Collectors.toMap(
-                Map.Entry::getKey,
-                Map.Entry::getValue,
-                (e1, e2) -> e1,
-                () -> new TreeMap<>(
-                    Comparator.comparingDouble((Book b) -> similarityCalculator.calculateSimilarity(origin, b))
-                        .reversed()))
-            );
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        SortedMap<Book, Double> sortedMap = new TreeMap<>((b1, b2) -> {
+            int scoreComparison = similarityScores.get(b2).compareTo(similarityScores.get(b1));
+            if (scoreComparison != 0) {
+                return scoreComparison;
+            }
+
+            return b1.title().compareTo(b2.title());
+        });
+
+        sortedMap.putAll(similarityScores);
+        return sortedMap;
     }
 
 }
