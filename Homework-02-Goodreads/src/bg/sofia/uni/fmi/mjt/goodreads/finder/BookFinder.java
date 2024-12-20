@@ -46,12 +46,10 @@ public class BookFinder implements BookFinderAPI {
         if (option == MatchOption.MATCH_ALL) {
             return books.stream()
                 .filter(b -> new HashSet<>(b.genres()).containsAll(genres))
-                .sorted(Comparator.comparing(Book::title))
                 .toList();
         } else {
             return books.stream()
                 .filter(b -> b.genres().stream().anyMatch(genres::contains))
-                .sorted(Comparator.comparing(Book::title))
                 .toList();
         }
     }
@@ -65,12 +63,10 @@ public class BookFinder implements BookFinderAPI {
         if (option == MatchOption.MATCH_ALL) {
             return books.stream()
                 .filter(b -> new HashSet<>(tokenHandler.tokenize(b.description())).containsAll(keywords))
-                .sorted(Comparator.comparing(Book::title))
                 .toList();
         } else {
             return books.stream()
                 .filter(b -> tokenHandler.tokenize(b.description()).stream().anyMatch(keywords::contains))
-                .sorted(Comparator.comparing(Book::title))
                 .toList();
         }
     }
