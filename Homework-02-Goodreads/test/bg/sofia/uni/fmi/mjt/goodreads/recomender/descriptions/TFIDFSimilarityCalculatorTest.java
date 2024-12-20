@@ -64,6 +64,23 @@ public class TFIDFSimilarityCalculatorTest {
     }
 
     @Test
+    void testComputeTFWithSameWords() {
+        Book book = Book.of(
+            new String[] {"0",
+                "Title",
+                "Author",
+                "Big big small",
+                "['Classics', 'Fiction', 'Historical Fiction', 'School', 'Literature', 'Young Adult', 'Historical']"
+                , "4.27",
+                "5,691,311",
+                "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"});
+
+        Map<String, Double> result = Map.of("big", 2.0 / 3, "small", 1.0 / 3);
+
+        assertEquals(result, tfidf.computeTF(book), "ComputeTF return incorrect result");
+    }
+
+    @Test
     void testComputeIDFWithNullBook() {
         assertThrows(IllegalArgumentException.class, () -> tfidf.computeIDF(null),
             "When books is null computeIDF should thrown an IllegalArgumentException");
@@ -82,7 +99,7 @@ public class TFIDFSimilarityCalculatorTest {
                 "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"});
 
         Map<String, Double> result =
-            Map.of("big", Math.log(3.0 / 4), "meat", Math.log(3.0 / 3), "training", Math.log(3.0 / 2.0), "with",
+            Map.of("big", Math.log(3.0 / 3), "meat", Math.log(3.0 / 2), "training", Math.log(3.0), "with",
                 Math.log(3.0));
 
         assertEquals(result, tfidf.computeIDF(book), "ComputeIDF return incorrect result");
@@ -103,9 +120,9 @@ public class TFIDFSimilarityCalculatorTest {
 
         Map<String, Double> result =
             Map.of(
-                "big", Math.log(3.0 / 4) * (1.0 / 4),
-                "meat", Math.log(3.0 / 3) * (1.0 / 4),
-                "training", Math.log(3.0 / 2.0) * (1.0 / 4),
+                "big", Math.log(3.0 / 3) * (1.0 / 4),
+                "meat", Math.log(3.0 / 2) * (1.0 / 4),
+                "training", Math.log(3.0) * (1.0 / 4),
                 "with", Math.log(3.0) * (1.0 / 4));
 
         assertEquals(result, tfidf.computeTFIDF(book), "ComputeTFIDF return incorrect result");
@@ -134,7 +151,7 @@ public class TFIDFSimilarityCalculatorTest {
                 "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
             });
 
-        assertEquals(0.03566269721238933, tfidf.calculateSimilarity(book1, book2),
+        assertEquals(0, tfidf.calculateSimilarity(book1, book2),
             "CalculateSimilarity return incorrect result");
    }
 
