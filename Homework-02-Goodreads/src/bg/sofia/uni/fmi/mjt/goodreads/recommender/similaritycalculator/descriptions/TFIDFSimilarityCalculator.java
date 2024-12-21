@@ -83,7 +83,7 @@ public class TFIDFSimilarityCalculator implements SimilarityCalculator {
         return words.stream()
             .collect(Collectors.toMap(
                 word -> word,
-                word -> docFrequency.get(word) == 0 ? Math.log((double) size) :
+                word -> docFrequency.get(word) == 0 ? Math.log(size) :
                     Math.log((double) size / docFrequency.get(word)
                 )));
     }
