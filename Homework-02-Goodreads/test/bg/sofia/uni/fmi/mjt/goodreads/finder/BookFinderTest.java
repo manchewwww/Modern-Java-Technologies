@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BookFinderTest {
 
     private static BookFinderAPI bookFinder;
-    private static Set<Book> books;
 
     @BeforeAll
     public static void setUp() {
@@ -31,12 +30,13 @@ public class BookFinderTest {
         String booksInput = """
             a
             0,Title,Author, "Big meat after training","['Classics', 'Fiction', 'Historical Fiction', 'School', 'Literature', 'Young Adult', 'Historical']",4.27,"5,691,311",https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird
-            1,Title 1,Author1, "Above five years and after three big","['Fantasy', 'Young Adult', 'Magic', 'Childrens', 'Middle Grade', 'Classics']",4.47,"9,278,135",https://www.goodreads.com/book/show/72193.Harry_Potter_and_the_Philosopher_s_Stone
+            4,Bar,MJT, "Foo","['2024']",4.27,"5,691,311",https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird
+            1,T,Author1, "Above five years and after three big","['Fantasy', 'Young Adult', 'Magic', 'Childrens', 'Middle Grade', 'Classics']",4.47,"9,278,135",https://www.goodreads.com/book/show/72193.Harry_Potter_and_the_Philosopher_s_Stone
             2,Title 2,Author, "A big about and after meat","['Classics', 'Fiction', 'Romance', 'Historical Fiction', 'Literature', 'Historical', 'Audiobook']",4.28,"3,944,155",https://www.goodreads.com/book/show/1885.Pride_and_Prejudice
             """;
 
         TextTokenizer tokenizer = new TextTokenizer(new StringReader(stopWordsInput));
-        books = BookLoader.load(new StringReader(booksInput));
+        Set<Book> books = BookLoader.load(new StringReader(booksInput));
 
         bookFinder = new BookFinder(books, tokenizer);
     }
@@ -61,7 +61,7 @@ public class BookFinderTest {
     public void testAllGenres() {
         Set<String> result =
             Set.of("Classics", "Fiction", "Historical Fiction", "School", "Literature", "Young Adult", "Historical",
-                "Fantasy", "Magic", "Childrens", "Middle Grade", "Romance", "Audiobook");
+                "Fantasy", "Magic", "Childrens", "Middle Grade", "Romance", "Audiobook", "2024");
 
         assertTrue(result.containsAll(bookFinder.allGenres()), "Genres are set incorrect");
     }
@@ -97,7 +97,7 @@ public class BookFinderTest {
             "['Classics', 'Fiction', 'Historical Fiction', 'School', 'Literature', 'Young Adult', 'Historical']",
             "4.27", "5,691,311", "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
         }), Book.of(new String[] {
-            "1", "Title 1", "Author1", "Above five years and after three big",
+            "1", "T", "Author1", "Above five years and after three big",
             "['Fantasy', 'Young Adult', 'Magic', 'Childrens', 'Middle Grade', 'Classics']",
             "4.47", "9,278,135",
             "https://www.goodreads.com/book/show/72193.Harry_Potter_and_the_Philosopher_s_Stone"
@@ -148,6 +148,38 @@ public class BookFinderTest {
         Set<String> keywords = Set.of("meat", "ok");
 
         assertIterableEquals(result, bookFinder.searchByKeywords(keywords, MatchOption.MATCH_ANY),
+            "Search by keywords with mach any option return incorrect result");
+    }
+
+    @Test
+    public void testSearchByKeywordsWithWordsFromTitle() {
+        List<Book> result = List.of(Book.of(new String[] {
+            "0", "Title", "Author", "Big meat after training",
+            "['Classics', 'Fiction', 'Historical Fiction', 'School', 'Literature', 'Young Adult', 'Historical']",
+            "4.27", "5,691,311", "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
+        }), Book.of(new String[] {
+            "2", "Title 2", "Author", "A big about and after meat",
+            "['Classics', 'Fiction', 'Romance', 'Historical Fiction', 'Literature', 'Historical', 'Audiobook']",
+            "4.28", "3,944,155", "https://www.goodreads.com/book/show/1885.Pride_and_Prejudice"
+        }));
+
+        Set<String> keywords = Set.of("title");
+
+        assertIterableEquals(result, bookFinder.searchByKeywords(keywords, MatchOption.MATCH_ANY),
+            "Search by keywords with mach any option return incorrect result");
+    }
+
+    @Test
+    public void testSearchByKeywordsWithCombineWords() {
+        List<Book> result = List.of(Book.of(new String[] {
+            "4", "Bar", "MJT", "Foo",
+            "['2024']",
+            "4.27", "5,691,311", "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
+        }));
+
+        Set<String> keywords = Set.of("bar", "foo");
+
+        assertIterableEquals(result, bookFinder.searchByKeywords(keywords, MatchOption.MATCH_ALL),
             "Search by keywords with mach any option return incorrect result");
     }
 
