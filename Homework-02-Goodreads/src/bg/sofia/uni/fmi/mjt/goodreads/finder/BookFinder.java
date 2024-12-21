@@ -3,7 +3,6 @@ package bg.sofia.uni.fmi.mjt.goodreads.finder;
 import bg.sofia.uni.fmi.mjt.goodreads.book.Book;
 import bg.sofia.uni.fmi.mjt.goodreads.tokenizer.TextTokenizer;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,11 +61,13 @@ public class BookFinder implements BookFinderAPI {
 
         if (option == MatchOption.MATCH_ALL) {
             return books.stream()
-                .filter(b -> new HashSet<>(tokenHandler.tokenize(b.description())).containsAll(keywords))
+                .filter(b -> new HashSet<>(tokenHandler.tokenize(b.description() + " " + b.title()))
+                    .containsAll(keywords))
                 .toList();
         } else {
             return books.stream()
-                .filter(b -> tokenHandler.tokenize(b.description()).stream().anyMatch(keywords::contains))
+                .filter(b -> tokenHandler.tokenize(b.description() + " " + b.title()).stream()
+                    .anyMatch(keywords::contains))
                 .toList();
         }
     }
