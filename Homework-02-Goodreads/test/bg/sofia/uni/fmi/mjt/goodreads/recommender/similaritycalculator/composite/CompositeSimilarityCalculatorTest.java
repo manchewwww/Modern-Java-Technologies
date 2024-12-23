@@ -59,19 +59,19 @@ public class CompositeSimilarityCalculatorTest {
     }
 
     @Test
-    public void testSimilarityWithFirstBookNull() {
+    public void testCalculateSimilarityWithFirstBookNullComposite() {
         assertThrows(IllegalArgumentException.class, () -> similarityCalculator.calculateSimilarity(null, secondBook),
             "When first book is null IllegalArgumentException should be thrown");
     }
 
     @Test
-    public void testSimilarityWithSecondBookNull() {
+    public void testCalculateSimilarityWithSecondBookNullComposite() {
         assertThrows(IllegalArgumentException.class, () -> similarityCalculator.calculateSimilarity(firstBook, null),
             "When second book is null IllegalArgumentException should be thrown");
     }
 
     @Test
-    public void testSimilarity() {
+    public void testCalculateSimilarityComposite() {
         assertEquals(0.229, similarityCalculator.calculateSimilarity(firstBook, secondBook),
             "Similarity calculation return incorrect result");
     }

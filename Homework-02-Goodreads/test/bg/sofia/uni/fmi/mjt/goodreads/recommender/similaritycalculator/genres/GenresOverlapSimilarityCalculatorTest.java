@@ -40,19 +40,19 @@ public class GenresOverlapSimilarityCalculatorTest {
     }
 
     @Test
-    public void testSimilarityWithNullFirstBook() {
+    public void testCalculateSimilarityWithNullFirstBookGenresOverlap() {
         assertThrows(IllegalArgumentException.class, () -> similarityCalculator.calculateSimilarity(null, secondBook),
             "When first book is null should throw a IllegalArgumentException");
     }
 
     @Test
-    public void testSimilarityWithNullSecondBook() {
+    public void testCalculateSimilarityWithNullSecondBookGenresOverlap() {
         assertThrows(IllegalArgumentException.class, () -> similarityCalculator.calculateSimilarity(firstBook, null),
             "When second book is null should throw a IllegalArgumentException");
     }
 
     @Test
-    public void testSimilarityWithSameGenres() {
+    public void testCalculateSimilarityWithSameGenres() {
         Book sameBook = Book.of(
             new String[] {"4",
                 "Title3",
@@ -69,7 +69,7 @@ public class GenresOverlapSimilarityCalculatorTest {
     }
 
     @Test
-    public void testSimilarityWithEmptyGenresSecondBook() {
+    public void testCalculateSimilarityWithEmptyGenresSecondBookGenresOverlap() {
         Book emptyBook = Book.of(
             new String[] {"4",
                 "Title3",
@@ -86,7 +86,7 @@ public class GenresOverlapSimilarityCalculatorTest {
     }
 
     @Test
-    public void testSimilarityWithEmptyGenresFirstBook() {
+    public void testCalculateSimilarityWithEmptyGenresFirstBookGenresOverlap() {
         Book emptyBook = Book.of(
             new String[] {"4",
                 "Title3",
@@ -103,7 +103,7 @@ public class GenresOverlapSimilarityCalculatorTest {
     }
 
     @Test
-    public void testSimilarity() {
+    public void testCalculateSimilarityGenresOverlap() {
         assertEquals(0.42857142857142855, similarityCalculator.calculateSimilarity(firstBook, secondBook),
             "Genres similarity calculator return incorrect result");
     }

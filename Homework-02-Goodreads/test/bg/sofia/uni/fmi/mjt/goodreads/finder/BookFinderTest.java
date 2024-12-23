@@ -43,7 +43,7 @@ public class BookFinderTest {
 
     @Test
     public void testSearchByAuthor() {
-        List<Book> result = List.of(Book.of(new String[] {
+            List<Book> result = List.of(Book.of(new String[] {
             "0", "Title", "Author", "Big meat after training",
             "['Classics', 'Fiction', 'Historical Fiction', 'School', 'Literature', 'Young Adult', 'Historical']",
             "4.27", "5,691,311", "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"

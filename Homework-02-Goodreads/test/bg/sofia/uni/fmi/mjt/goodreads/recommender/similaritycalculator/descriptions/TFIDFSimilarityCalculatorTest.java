@@ -128,7 +128,7 @@ public class TFIDFSimilarityCalculatorTest {
     }
 
     @Test
-    void testCalculateSimilarity() {
+    void testCalculateSimilarityTFIDF() {
         Book book1 = Book.of(
             new String[] {"0",
                 "Title",
