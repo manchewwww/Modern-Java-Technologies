@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
@@ -29,6 +30,12 @@ public class TextTokenizerTest {
     public void testTokenizeWithNullInput() {
         assertThrows(IllegalArgumentException.class, () -> tokenizer.tokenize(null),
             "When input is null tokenize should thrown IllegalArgumentException");
+    }
+
+    @Test
+    public void testTokenizeWithEmpty() {
+        assertIterableEquals(new ArrayList<>(), tokenizer.tokenize(""),
+            "When input is empty tokenize should return empty list");
     }
 
     @Test
