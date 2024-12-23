@@ -1,8 +1,7 @@
-package bg.sofia.uni.fmi.mjt.goodreads.recomender.composite;
+package bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.composite;
 
 import bg.sofia.uni.fmi.mjt.goodreads.book.Book;
 import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.SimilarityCalculator;
-import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.composite.CompositeSimilarityCalculator;
 import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.descriptions.TFIDFSimilarityCalculator;
 import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.genres.GenresOverlapSimilarityCalculator;
 import org.junit.jupiter.api.BeforeAll;

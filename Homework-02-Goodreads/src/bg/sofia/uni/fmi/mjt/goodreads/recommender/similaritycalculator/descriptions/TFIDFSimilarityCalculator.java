@@ -46,17 +46,15 @@ public class TFIDFSimilarityCalculator implements SimilarityCalculator {
             throw new IllegalArgumentException("Book cannot be null");
         }
 
-        Map<String, Double> tf = new HashMap<>();
         List<String> words = tokenizer.tokenize(book.description());
 
-        for (String word : words) {
-            tf.put(word, tf.getOrDefault(word, 0.0) + 1);
-        }
+        Map<String, Long> wordsCounting = words.stream()
+            .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
 
         int totalWords = words.size();
-        tf.replaceAll((w, _) -> tf.get(w) / totalWords);
 
-        return tf;
+        return wordsCounting.entrySet().stream()
+            .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue() / (double) totalWords));
     }
 
     public Map<String, Double> computeIDF(Book book) {
@@ -83,7 +81,7 @@ public class TFIDFSimilarityCalculator implements SimilarityCalculator {
         return words.stream()
             .collect(Collectors.toMap(
                 word -> word,
-                word -> docFrequency.get(word) == 0 ? Math.log(size) :
+                word -> docFrequency.get(word) == 0 ? Math.log  (size) :
                     Math.log((double) size / docFrequency.get(word)
                 )));
     }

@@ -1,8 +1,7 @@
-package bg.sofia.uni.fmi.mjt.goodreads.recomender.genres;
+package bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.genres;
 
 import bg.sofia.uni.fmi.mjt.goodreads.book.Book;
 import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.SimilarityCalculator;
-import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.genres.GenresOverlapSimilarityCalculator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
