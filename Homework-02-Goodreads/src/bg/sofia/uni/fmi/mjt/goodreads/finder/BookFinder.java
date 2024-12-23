@@ -24,6 +24,12 @@ public class BookFinder implements BookFinderAPI {
 
     @Override
     public List<Book> searchByAuthor(String authorName) {
+
+        if (authorName == null) {
+            throw new IllegalArgumentException("Author name must not be null");
+        } else if (authorName.isEmpty()) {
+            throw new IllegalArgumentException("Author name must not be empty");
+        }
         return books.stream()
             .filter(b -> b.author().equals(authorName))
             .toList();
@@ -61,12 +67,19 @@ public class BookFinder implements BookFinderAPI {
 
         if (option == MatchOption.MATCH_ALL) {
             return books.stream()
-                .filter(b -> new HashSet<>(tokenHandler.tokenize(b.description() + " " + b.title()))
+                .filter(b -> new HashSet<>(tokenHandler.tokenize(b.description()))
+                    .containsAll(keywords) || new HashSet<>(tokenHandler.tokenize(b.title()))
+                    .containsAll(keywords) ||
+                    new HashSet<>(tokenHandler.tokenize(b.title().concat(" " + b.description())))
                     .containsAll(keywords))
                 .toList();
         } else {
             return books.stream()
-                .filter(b -> tokenHandler.tokenize(b.description() + " " + b.title()).stream()
+                .filter(b -> tokenHandler.tokenize(b.description()).stream()
+                    .anyMatch(keywords::contains) ||
+                    tokenHandler.tokenize(b.title()).stream()
+                    .anyMatch(keywords::contains) ||
+                    tokenHandler.tokenize(b.title().concat(" " + b.description())).stream()
                     .anyMatch(keywords::contains))
                 .toList();
         }
