@@ -1,8 +1,5 @@
 package bg.sofia.uni.fmi.mjt.sentimentanalyzer;
 
-import bg.sofia.uni.fmi.mjt.sentimentanalyzer.AnalyzerInput;
-import bg.sofia.uni.fmi.mjt.sentimentanalyzer.ParallelSentimentAnalyzer;
-import bg.sofia.uni.fmi.mjt.sentimentanalyzer.SentimentScore;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringReader;
