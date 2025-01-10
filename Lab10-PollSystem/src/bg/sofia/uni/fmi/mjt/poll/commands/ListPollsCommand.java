@@ -16,7 +16,7 @@ public class ListPollsCommand implements Command {
     @Override
     public String execute(String[] args) {
         if (args.length != 0) {
-            throw new IllegalArgumentException("Invalid number of arguments");
+            return "{\"status\":\"ERROR\",\"message\":\"Usage: list-polls\"}";
         }
 
         Map<Integer, Poll> polls = pollRepository.getAllPolls();

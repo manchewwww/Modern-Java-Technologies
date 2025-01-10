@@ -14,7 +14,7 @@ public class SubmitVoteCommand implements Command {
     @Override
     public String execute(String[] args) {
         if (args.length != 2) {
-            throw new IllegalArgumentException("Wrong number of arguments");
+            return "{\"status\":\"ERROR\",\"message\":\"Usage: submit-vote <id> <option>\"}";
         }
 
         int id = Integer.parseInt(args[0]);
