@@ -17,7 +17,13 @@ public class SubmitVoteCommand implements Command {
             return "{\"status\":\"ERROR\",\"message\":\"Usage: submit-vote <id> <option>\"}";
         }
 
-        int id = Integer.parseInt(args[0]);
+        int id;
+        try {
+            id = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            return "\"{\"status\":\"ERROR\",\"message\":\"Invalid command\"}\"";
+        }
+
         Poll poll = pollRepository.getPoll(id);
         if (poll == null) {
             return "{\"status\":\"ERROR\",\"message\":\"Poll with ID " + id + " does not exist.\"}";
@@ -25,7 +31,7 @@ public class SubmitVoteCommand implements Command {
 
         String option = args[1];
         if (!poll.options().containsKey(option)) {
-            return "{\"status\":\"ERROR\",\"message\":\"Invalid option. Option " + option + " does not exist.\"}\n";
+            return "{\"status\":\"ERROR\",\"message\":\"Invalid option. Option " + option + " does not exist.\"}";
         }
 
         synchronized (poll) {

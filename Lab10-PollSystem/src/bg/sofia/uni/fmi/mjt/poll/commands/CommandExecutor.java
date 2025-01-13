@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.poll.commands;
 
+import bg.sofia.uni.fmi.mjt.poll.exceptions.InvalidCommandException;
 import bg.sofia.uni.fmi.mjt.poll.server.repository.PollRepository;
 
 import java.util.Arrays;
@@ -13,14 +14,21 @@ public class CommandExecutor {
     }
 
     public String execute(String line) {
+        line = line.replaceAll("\n", "");
         String[] args = line.split(" ");
+        if (args.length == 0) {
+            return "\"{\"status\":\"ERROR\",\"message\":\"Invalid command\"}\"";
+        }
         String command = args[0];
         args = Arrays.stream(args)
             .skip(1)
-            .filter(s -> !s.isEmpty())
+            .filter(s -> !s.isBlank())
             .toArray(String[]::new);
-
-        return commandFactory.getCommand(command).execute(args);
+        try {
+            return commandFactory.getCommand(command).execute(args);
+        } catch (InvalidCommandException e) {
+            return "\"{\"status\":\"ERROR\",\"message\":\"Invalid command\"}\"";
+        }
     }
 
 }

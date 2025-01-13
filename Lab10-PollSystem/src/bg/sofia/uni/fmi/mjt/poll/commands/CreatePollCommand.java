@@ -19,7 +19,8 @@ public class CreatePollCommand implements Command {
     @Override
     public String execute(String[] args) {
         if (args.length < MIN_NUMBER_OF_ARGUMENTS) {
-            return "{\"status\":\"ERROR\",\"message\":\"Usage: create-poll <question> <option-1> <option-2> [... <option-N>]\"}";
+            return "{\"status\":\"ERROR\",\"message\":\"Usage: create-poll " +
+                "<question> <option-1> <option-2> [... <option-N>]\"}";
         }
 
         String question = args[0];
