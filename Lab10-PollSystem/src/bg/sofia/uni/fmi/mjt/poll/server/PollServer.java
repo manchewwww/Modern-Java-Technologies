@@ -75,10 +75,11 @@ public class PollServer {
             if (key.isReadable()) {
                 SocketChannel clientChannel = (SocketChannel) key.channel();
                 String clientInput = getClientInput(clientChannel);
-                System.out.println(clientInput);
-                if (clientInput == null) {
+                if (clientInput == null || clientInput.isEmpty()) {
+                    writeClientOutput(clientChannel, "{\"status\":\"ERROR\",\"message\":\"Invalid command\"}");
                     continue;
                 }
+                System.out.println(clientInput);
 
                 String output = commandExecutor.execute(clientInput);
                 writeClientOutput(clientChannel, output);
