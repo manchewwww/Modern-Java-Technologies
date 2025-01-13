@@ -9,23 +9,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class InMemoryPollRepository implements PollRepository {
 
-    private static final AtomicInteger ID = new AtomicInteger(1);
+    private final AtomicInteger iD = new AtomicInteger(1);
     private final Map<Integer, Poll> polls = new ConcurrentHashMap<>();
 
     @Override
     public int addPoll(Poll poll) {
-        if  (poll == null) {
-            throw new IllegalArgumentException("Poll is null");
-        }
-
-        int id = ID.getAndIncrement();
+        int id = iD.getAndIncrement();
         polls.put(id, poll);
         return id;
     }
 
     @Override
     public Poll getPoll(int pollId) {
-        return polls.get(pollId);
+        return polls.getOrDefault(pollId, null);
     }
 
     @Override
