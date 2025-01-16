@@ -23,9 +23,6 @@ public class BuildRequest {
     }
 
     public HttpRequest buildRequest(Arguments arguments) {
-        if (arguments.getKeyword() == null) {
-            throw new IllegalArgumentException(KEYWORD_MISSING_EXCEPTION_MESSAGE);
-        }
         url.append(KEYWORD_TEXT_FOR_REQUEST).append(arguments.getKeyword());
 
         if (arguments.getCategory() != null) {
