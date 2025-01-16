@@ -13,6 +13,8 @@ import java.net.http.HttpResponse;
 
 public class StatusCodeFactory {
 
+    private static final String UNEXPECTED_RESPONSE_CODE_EXCEPTION_MESSAGE =
+        "Unexpected response code from weather forecast service";
     private static final int OK = 200;
     private static final int BAD_REQUEST = 400;
     private static final int UNAUTHORIZED = 401;
@@ -25,18 +27,18 @@ public class StatusCodeFactory {
             return GSON.fromJson(response.body(), OKResponse.class);
         } else if (response.statusCode() == BAD_REQUEST) {
             ErrorResponse errorResponse = GSON.fromJson(response.body(), ErrorResponse.class);
-            throw new BadRequestException("Bad request. " + errorResponse.getMessage());
+            throw new BadRequestException(errorResponse.message());
         } else if (response.statusCode() == UNAUTHORIZED) {
             ErrorResponse errorResponse = GSON.fromJson(response.body(), ErrorResponse.class);
-            throw new InvalidApiKeyException(errorResponse.getMessage());
+            throw new InvalidApiKeyException(errorResponse.message());
         } else if (response.statusCode() == TOO_MANY_REQUESTS) {
             ErrorResponse errorResponse = GSON.fromJson(response.body(), ErrorResponse.class);
-            throw new LimitExceedOfRequestInWindowException(errorResponse.getMessage());
+            throw new LimitExceedOfRequestInWindowException(errorResponse.message());
         } else if (response.statusCode() == SERVER_ERROR) {
             ErrorResponse errorResponse = GSON.fromJson(response.body(), ErrorResponse.class);
-            throw new ServerErrorException(errorResponse.getMessage());
+            throw new ServerErrorException(errorResponse.message());
         } else {
-            throw new ApiException("Unexpected response code from weather forecast service");
+            throw new ApiException(UNEXPECTED_RESPONSE_CODE_EXCEPTION_MESSAGE);
         }
     }
 
