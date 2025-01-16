@@ -13,14 +13,16 @@ import java.net.http.HttpResponse;
 
 public class NewsClient {
 
+    private static final String API_KEY = "paste_your_API_key_here";
+
     private static final String REQUEST_INTERRUPTED_EXCEPTION_MESSAGE = "Request interrupted";
     private static final String IO_EXCEPTION_MESSAGE = "An I/O error occurred while sending the request";
 
     private final HttpClient client;
     private final String apiKey;
 
-    public NewsClient(String apiKey) {
-        this(HttpClient.newHttpClient(), apiKey);
+    public NewsClient(HttpClient client) {
+        this(client, API_KEY);
     }
 
     public NewsClient(HttpClient client, String apiKey) {
@@ -30,6 +32,10 @@ public class NewsClient {
 
     public OKResponse getResponse(Arguments arguments)
         throws ApiException {
+        if (arguments == null) {
+            throw new IllegalArgumentException("Arguments cannot be null");
+        }
+
         HttpResponse<String> response;
         BuildRequest buildRequest = new BuildRequest(apiKey);
         HttpRequest request = buildRequest.buildRequest(arguments);
