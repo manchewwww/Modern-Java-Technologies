@@ -29,6 +29,9 @@ public class Arguments {
     }
 
     public static ArgumentsBuilder builder(String keyword) {
+        if (keyword == null) {
+            throw new IllegalArgumentException("Keyword cannot be null in builder argument");
+        }
         return new ArgumentsBuilder(keyword);
     }
 
