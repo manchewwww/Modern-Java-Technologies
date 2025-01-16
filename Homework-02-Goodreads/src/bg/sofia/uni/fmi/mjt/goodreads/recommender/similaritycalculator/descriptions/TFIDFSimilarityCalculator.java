@@ -5,7 +5,6 @@ import bg.sofia.uni.fmi.mjt.goodreads.recommender.similaritycalculator.Similarit
 import bg.sofia.uni.fmi.mjt.goodreads.tokenizer.TextTokenizer;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +80,7 @@ public class TFIDFSimilarityCalculator implements SimilarityCalculator {
         return words.stream()
             .collect(Collectors.toMap(
                 word -> word,
-                word -> docFrequency.get(word) == 0 ? Math.log  (size) :
+                word -> docFrequency.get(word) == 0 ? Math.log(size) :
                     Math.log((double) size / docFrequency.get(word)
                 )));
     }
