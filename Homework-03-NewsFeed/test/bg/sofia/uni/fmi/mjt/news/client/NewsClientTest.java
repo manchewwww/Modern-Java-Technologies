@@ -22,6 +22,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -73,7 +74,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(200);
         when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump", "us"))
             .build();
 
         OKResponse result = newsClient.getResponse(arguments);
@@ -87,7 +88,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(200);
         when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .setCountry("BG")
             .build();
 
@@ -102,7 +103,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(200);
         when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .setCategory("sport")
             .build();
 
@@ -117,7 +118,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(200);
         when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .setPage(1)
             .build();
 
@@ -132,7 +133,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(200);
         when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .setPageSize(1)
             .build();
 
@@ -147,7 +148,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(200);
         when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .setCategory("sport")
             .setCountry("us")
             .setPage(10)
@@ -169,7 +170,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(400);
         when(httpNewsResponseMock.body()).thenReturn(badRequestResponseToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .build();
 
         assertThrows(BadRequestException.class, () -> newsClient.getResponse(arguments)
@@ -185,7 +186,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(401);
         when(httpNewsResponseMock.body()).thenReturn(unauthorizedToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .build();
 
         assertThrows(InvalidApiKeyException.class, () -> newsClient.getResponse(arguments)
@@ -201,7 +202,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(429);
         when(httpNewsResponseMock.body()).thenReturn(tooManyRequestsToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .build();
 
         assertThrows(LimitExceedOfRequestInWindowException.class, () -> newsClient.getResponse(arguments)
@@ -217,7 +218,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(500);
         when(httpNewsResponseMock.body()).thenReturn(serverErrorToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .build();
 
         assertThrows(ServerErrorException.class, () -> newsClient.getResponse(arguments)
@@ -233,7 +234,7 @@ public class NewsClientTest {
         when(httpNewsResponseMock.statusCode()).thenReturn(333);
         when(httpNewsResponseMock.body()).thenReturn(unexpectedToJson);
 
-        Arguments arguments = Arguments.builder("trump")
+        Arguments arguments = Arguments.builder(Set.of("trump"))
             .build();
 
         assertThrows(ApiException.class, () -> newsClient.getResponse(arguments)
