@@ -1,5 +1,7 @@
 package bg.sofia.uni.fmi.mjt.news.builder;
 
+import java.util.Set;
+
 public class Arguments {
 
     private String keyword;
@@ -28,11 +30,11 @@ public class Arguments {
         return pageSize;
     }
 
-    public static ArgumentsBuilder builder(String keyword) {
-        if (keyword == null) {
+    public static ArgumentsBuilder builder(Set<String> keywords) {
+        if (keywords == null) {
             throw new IllegalArgumentException("Keyword cannot be null in builder argument");
         }
-        return new ArgumentsBuilder(keyword);
+        return new ArgumentsBuilder(keywords);
     }
 
     private Arguments(ArgumentsBuilder builder) {
@@ -51,8 +53,8 @@ public class Arguments {
         private int page;
         private int pageSize;
 
-        private ArgumentsBuilder(String keyword) {
-            this.keyword = keyword;
+        private ArgumentsBuilder(Set<String> keywords) {
+            this.keyword = String.join("+", keywords);
         }
 
         public ArgumentsBuilder setCategory(String category) {
