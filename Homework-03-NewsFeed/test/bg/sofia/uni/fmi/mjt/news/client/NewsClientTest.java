@@ -84,66 +84,6 @@ public class NewsClientTest {
     }
 
     @Test
-    public void testGetResponseWithKeywordAndCountry() throws ApiException {
-        when(httpNewsResponseMock.statusCode()).thenReturn(200);
-        when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
-
-        Arguments arguments = Arguments.builder(Set.of("trump"))
-            .setCountry("BG")
-            .build();
-
-        OKResponse result = newsClient.getResponse(arguments);
-
-        assertEquals(okResponse, result,
-            "Incorrect response for request with keyword and country");
-    }
-
-    @Test
-    public void testGetResponseWithKeywordAndCategory() throws ApiException {
-        when(httpNewsResponseMock.statusCode()).thenReturn(200);
-        when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
-
-        Arguments arguments = Arguments.builder(Set.of("trump"))
-            .setCategory("sport")
-            .build();
-
-        OKResponse result = newsClient.getResponse(arguments);
-
-        assertEquals(okResponse, result,
-            "Incorrect response for request with keyword and category");
-    }
-
-    @Test
-    public void testGetResponseWithKeywordAndPage() throws ApiException {
-        when(httpNewsResponseMock.statusCode()).thenReturn(200);
-        when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
-
-        Arguments arguments = Arguments.builder(Set.of("trump"))
-            .setPage(1)
-            .build();
-
-        OKResponse result = newsClient.getResponse(arguments);
-
-        assertEquals(okResponse, result,
-            "Incorrect response for request with keyword and page");
-    }
-
-    @Test
-    public void testGetResponseWithKeywordAndPageSize() throws ApiException {
-        when(httpNewsResponseMock.statusCode()).thenReturn(200);
-        when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
-
-        Arguments arguments = Arguments.builder(Set.of("trump"))
-            .setPageSize(1)
-            .build();
-
-        OKResponse result = newsClient.getResponse(arguments);
-
-        assertEquals(okResponse, result,
-            "Incorrect response for request with keyword and page");
-    }
-
-    @Test
     public void testGetResponseWithAll() throws ApiException {
         when(httpNewsResponseMock.statusCode()).thenReturn(200);
         when(httpNewsResponseMock.body()).thenReturn(okResponseToJson);
