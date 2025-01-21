@@ -14,7 +14,7 @@ public class PollClient {
 
     private static ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
         try (SocketChannel socketChannel = SocketChannel.open();
              Scanner scanner = new Scanner(System.in)) {
             socketChannel.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
@@ -31,7 +31,7 @@ public class PollClient {
                     break;
                 }
 
-                this.actionsWithBuffer(socketChannel, message);
+                actionsWithBuffer(socketChannel, message);
 
                 byte[] byteArray = new byte[buffer.remaining()];
                 buffer.get(byteArray);
@@ -43,7 +43,7 @@ public class PollClient {
         }
     }
 
-    private void actionsWithBuffer(SocketChannel socketChannel, String message) throws IOException {
+    private static void actionsWithBuffer(SocketChannel socketChannel, String message) throws IOException {
         buffer.clear(); // switch to writing mode
         buffer.put(message.getBytes()); // buffer fill
         buffer.flip(); // switch to reading mode
