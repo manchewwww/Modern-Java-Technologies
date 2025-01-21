@@ -6,4 +6,8 @@ public class ServerErrorException extends ApiException {
         super(message);
     }
 
+    public ServerErrorException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

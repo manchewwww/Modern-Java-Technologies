@@ -6,4 +6,8 @@ public class InvalidApiKeyException extends ApiException {
         super(message);
     }
 
+    public InvalidApiKeyException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

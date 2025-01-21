@@ -6,4 +6,8 @@ public class LimitExceedOfRequestInWindowException extends ApiException {
         super(message);
     }
 
+    public LimitExceedOfRequestInWindowException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }
