@@ -7,7 +7,6 @@ import java.net.http.HttpRequest;
 
 public class BuildRequest {
 
-    private static final String KEYWORD_MISSING_EXCEPTION_MESSAGE = "Keyword cannot be null";
     private static final String KEYWORD_TEXT_FOR_REQUEST = "q=";
     private static final String CATEGORY_TEXT_FOR_REQUEST = "&category=";
     private static final String COUNTRY_TEXT_FOR_REQUEST = "&country=";
