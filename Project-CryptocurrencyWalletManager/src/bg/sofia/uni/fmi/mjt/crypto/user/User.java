@@ -1,7 +1,8 @@
-package bg.sofia.uni.fmi.mjt.crypto.wallet;
+package bg.sofia.uni.fmi.mjt.crypto.user;
 
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InsufficientFundsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountOfDepositException;
+import bg.sofia.uni.fmi.mjt.crypto.wallet.Wallet;
 
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class User {
     }
 
     public String getWalletSummary() {
-        return String.format("Wallet summary: " + System.lineSeparator() + "%s", wallet.getWalletSummary());
+        return String.format("Wallet summary: %s", wallet.getWalletSummary());
     }
 
     public String getWalletOverallSummary(Map<String, Double> currentPrices) {
