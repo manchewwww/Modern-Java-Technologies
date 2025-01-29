@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InsufficientFundsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountOfDepositException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
@@ -26,7 +27,7 @@ public class BuyCommand implements Command {
     @Override
     public String execute(String[] args)
         throws UserDoesNotExistsException, InvalidCountOfArgumentsException, InvalidAmountOfDepositException,
-        InsufficientFundsException {
+        InsufficientFundsException, CryptoNotFoundException {
         if (args.length != 2) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }
