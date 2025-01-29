@@ -21,6 +21,7 @@ public class Wallet {
     private static final String NO_INVESTMENTS_FOUND_MESSAGE = "No investments found.";
 
     private static final double MINIMUM_AMOUNT = 0.0;
+    private static final int TYPE_CRYPTO = 1;
     private static final Gson GSON = new Gson();
 
     private double balance;
@@ -69,11 +70,11 @@ public class Wallet {
 
             cryptoInvestments.putIfAbsent(assetId, new ArrayList<>());
             cryptoInvestments.get(assetId)
-                .add(new Crypto(assetId, currentPrice, amount / currentPrice));
+                .add(new Crypto(assetId, currentPrice, TYPE_CRYPTO, amount / currentPrice));
         }
     }
 
-    public void sell(String assetId, double currentPrice) {
+    public void sell(String assetId, double currentPrice) throws CryptoNotFoundException {
         if (assetId == null) {
             throw new IllegalArgumentException(CRYPTO_ASSETS_ID_NULL_MESSAGE);
         }
@@ -100,15 +101,16 @@ public class Wallet {
         return GSON.toJson(this);
     }
 
-    public synchronized String getWalletOverallSummary(Map<String, Double> currentPrices) {
+    public synchronized String getWalletOverallSummary(Map<String, Double> currentPrices)
+        throws CryptoNotFoundException {
         if (currentPrices == null) {
             throw new IllegalArgumentException(CURRENT_PRICES_NULL_MESSAGE);
         }
-        if (!currentPrices.keySet().containsAll(cryptoInvestments.keySet())) {
-            throw new CryptoNotFoundException(CRYPTO_DOES_NOT_EXIST_MESSAGE);
-        }
         if (cryptoInvestments.isEmpty()) {
             return NO_INVESTMENTS_FOUND_MESSAGE;
+        }
+        if (!currentPrices.keySet().containsAll(cryptoInvestments.keySet())) {
+            throw new CryptoNotFoundException(CRYPTO_DOES_NOT_EXIST_MESSAGE);
         }
 
         double investedAmountInCrypto = cryptoInvestments.values().stream()
