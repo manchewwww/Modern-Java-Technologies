@@ -18,4 +18,7 @@ public class ErrorMessages {
     public static final String UNEXPECTED_RESPONSE_CODE_EXCEPTION_MESSAGE =
         "Unexpected response code from weather forecast service";
 
+    public static final String REQUEST_INTERRUPTED_EXCEPTION_MESSAGE = "Request interrupted";
+    public static final String IO_EXCEPTION_MESSAGE = "An I/O error occurred while sending the request";
+
 }
