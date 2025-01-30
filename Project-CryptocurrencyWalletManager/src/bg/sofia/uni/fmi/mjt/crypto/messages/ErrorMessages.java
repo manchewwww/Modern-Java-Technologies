@@ -21,4 +21,11 @@ public class ErrorMessages {
     public static final String REQUEST_INTERRUPTED_EXCEPTION_MESSAGE = "Request interrupted";
     public static final String IO_EXCEPTION_MESSAGE = "An I/O error occurred while sending the request";
 
+    public static final String LOAD_USERS_ERROR = "Could not load user repository from file";
+
+    public static final String WRITE_USERS_ERROR = "Could not save user repository to file";
+
+    public static final String YOU_ARE_LOGIN_MESSAGE = "You are logged in profile!";
+    public static final String YOU_ARE_NOT_LOGIN_MESSAGE = "You are not logged in profile!";
+
 }
