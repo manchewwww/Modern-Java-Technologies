@@ -2,7 +2,6 @@ package bg.sofia.uni.fmi.mjt.crypto.commands;
 
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
-import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
 import bg.sofia.uni.fmi.mjt.crypto.server.api.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
@@ -24,7 +23,7 @@ public class SellCommand implements Command {
 
     @Override
     public String execute(String[] args)
-        throws UserDoesNotExistsException, InvalidCountOfArgumentsException, CryptoNotFoundException {
+        throws InvalidCountOfArgumentsException, CryptoNotFoundException {
         if (args.length != 1) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }

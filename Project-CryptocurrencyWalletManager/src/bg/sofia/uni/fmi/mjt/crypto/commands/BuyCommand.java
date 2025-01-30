@@ -4,7 +4,6 @@ import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InsufficientFundsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountOfDepositException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
-import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
 import bg.sofia.uni.fmi.mjt.crypto.server.api.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
@@ -26,7 +25,7 @@ public class BuyCommand implements Command {
 
     @Override
     public String execute(String[] args)
-        throws UserDoesNotExistsException, InvalidCountOfArgumentsException, InvalidAmountOfDepositException,
+        throws InvalidCountOfArgumentsException, InvalidAmountOfDepositException,
         InsufficientFundsException, CryptoNotFoundException {
         if (args.length != 2) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
@@ -36,6 +35,7 @@ public class BuyCommand implements Command {
         double amount = Double.parseDouble(args[1]);
 
         String username = UserSessionManager.getUsername(socketChannel);
+
         return userRepository.getUser(username).buyCrypto(assetId, amount, cacheData.getPriceFromAssetId(assetId));
     }
 
