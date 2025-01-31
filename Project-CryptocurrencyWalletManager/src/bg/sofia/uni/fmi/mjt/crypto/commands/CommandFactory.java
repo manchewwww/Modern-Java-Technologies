@@ -1,8 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCommandException;
-import bg.sofia.uni.fmi.mjt.crypto.server.api.CoinApi;
-import bg.sofia.uni.fmi.mjt.crypto.server.api.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
 
@@ -29,7 +27,8 @@ public class CommandFactory {
             case "sell" -> new SellCommand(userRepository, channel, dataRepository.getCacheData());
             case "list-offerings" -> new ListOfferingsCommand(dataRepository.getCacheData());
             case "get-wallet-summary" -> new GetWalletSummaryCommand(userRepository, channel);
-            case "get-wallet-overall-summary" -> new GetWalletOverallSummaryCommand(userRepository, channel, dataRepository.getCacheData());
+            case "get-wallet-overall-summary" ->
+                new GetWalletOverallSummaryCommand(userRepository, channel, dataRepository.getCacheData());
             default -> throw new InvalidCommandException("Invalid command: " + command);
         };
     }
