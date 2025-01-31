@@ -1,7 +1,7 @@
 package bg.sofia.uni.fmi.mjt.crypto.api.factory;
 
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
-import bg.sofia.uni.fmi.mjt.crypto.api.data.CacheData;
+import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.api.exceptions.ApiException;
 import bg.sofia.uni.fmi.mjt.crypto.api.exceptions.BadRequestException;
 import bg.sofia.uni.fmi.mjt.crypto.api.exceptions.ForbiddenException;

@@ -1,4 +1,4 @@
-package bg.sofia.uni.fmi.mjt.crypto.api.data;
+package bg.sofia.uni.fmi.mjt.crypto.server.data;
 
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;

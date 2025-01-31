@@ -1,7 +1,7 @@
 package bg.sofia.uni.fmi.mjt.crypto.server.repository;
 
 import bg.sofia.uni.fmi.mjt.crypto.api.CoinApi;
-import bg.sofia.uni.fmi.mjt.crypto.api.data.CacheData;
+import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.api.exceptions.ApiException;
 
 import java.net.http.HttpClient;
