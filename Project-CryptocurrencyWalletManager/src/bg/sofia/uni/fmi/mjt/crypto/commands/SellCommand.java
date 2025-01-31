@@ -3,7 +3,7 @@ package bg.sofia.uni.fmi.mjt.crypto.commands;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
-import bg.sofia.uni.fmi.mjt.crypto.server.api.data.CacheData;
+import bg.sofia.uni.fmi.mjt.crypto.api.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
 import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
 
