@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.server.writer;
 
+import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
 import com.google.gson.Gson;
 
@@ -19,7 +20,7 @@ public class WriteUserRepositoryToFile {
         try (FileWriter fileWriter = new FileWriter(file.getAbsoluteFile())) {
             fileWriter.write(GSON.toJson(userRepository));
         } catch (IOException e) {
-            throw new RuntimeException("Could not save user repository to file");
+            throw new RuntimeException(ErrorMessages.WRITE_USERS_ERROR);
         }
     }
 
