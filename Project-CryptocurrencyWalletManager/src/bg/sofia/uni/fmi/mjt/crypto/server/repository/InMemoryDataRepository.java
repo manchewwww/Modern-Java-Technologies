@@ -18,8 +18,8 @@ public class InMemoryDataRepository implements DataRepository {
     private CacheData cacheData;
     private final ScheduledExecutorService executor;
 
-    public InMemoryDataRepository(String apiKey) {
-        coinApi = new CoinApi(HttpClient.newBuilder().build(), apiKey);
+    public InMemoryDataRepository() throws ApiException {
+        coinApi = new CoinApi(HttpClient.newBuilder().build());
         executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(() -> {
             try {
