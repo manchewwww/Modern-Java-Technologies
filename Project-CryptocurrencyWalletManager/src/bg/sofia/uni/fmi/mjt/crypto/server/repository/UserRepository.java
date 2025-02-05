@@ -10,6 +10,6 @@ public interface UserRepository {
 
     boolean logIn(String username, String password) throws UserDoesNotExistsException;
 
-    User getUser(String username);
+    User getUser(String username) throws UserDoesNotExistsException;
 
 }
