@@ -15,12 +15,12 @@ public class WriteUserRepositoryToFile {
         Path.of("src", "bg", "sofia", "uni", "fmi", "mjt", "crypto", "server", "file", "data.json");
     private static final Gson GSON = new Gson();
 
-    public static void writeData(UserRepository userRepository) {
+    public static void writeData(UserRepository userRepository) throws IOException {
         File file = PATH.toFile();
         try (FileWriter fileWriter = new FileWriter(file.getAbsoluteFile())) {
             fileWriter.write(GSON.toJson(userRepository));
         } catch (IOException e) {
-            throw new RuntimeException(ErrorMessages.WRITE_USERS_ERROR);
+            throw new IOException(ErrorMessages.WRITE_USERS_ERROR);
         }
     }
 
