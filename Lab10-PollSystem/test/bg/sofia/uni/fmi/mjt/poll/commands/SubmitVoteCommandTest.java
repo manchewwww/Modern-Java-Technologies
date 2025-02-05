@@ -41,7 +41,7 @@ public class SubmitVoteCommandTest {
     @Test
     public void testSubmitVoteCommandExecuteWithValidArgumentsWithInvalidID() {
         String[] args = new String[] {"asd", "A"};
-        assertThrows(NumberFormatException.class, () -> command.execute(args),
+        assertTrue(command.execute(args).contains("\"status\":\"ERROR\""),
             "When ListPollsCommand execute invalid parsing int expect ERROR status");
     }
 
