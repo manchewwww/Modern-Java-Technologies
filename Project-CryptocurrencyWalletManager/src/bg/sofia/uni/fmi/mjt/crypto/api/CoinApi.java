@@ -7,27 +7,25 @@ import bg.sofia.uni.fmi.mjt.crypto.api.factory.StatusCodeFactory;
 import bg.sofia.uni.fmi.mjt.crypto.api.request.BuildRequest;
 import com.google.gson.Gson;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Path;
+import java.util.Properties;
 
 public class CoinApi {
-
-    private static final String API_KEY = "YOUR_API_KEY";
 
     private static final Gson GSON = new Gson();
 
     private final HttpClient httpClient;
     private final String apiKey;
 
-    public CoinApi(HttpClient httpClient) {
-        this(httpClient, API_KEY);
-    }
-
-    public CoinApi(HttpClient httpClient, String apiKey) {
+    public CoinApi(HttpClient httpClient) throws ApiException {
         this.httpClient = httpClient;
-        this.apiKey = apiKey;
+        this.apiKey = loadApiKey();
     }
 
     public CacheData getResponse() throws ApiException {
@@ -44,6 +42,21 @@ public class CoinApi {
         }
 
         return StatusCodeFactory.parseElements(response);
+    }
+
+    private String loadApiKey() throws ApiException {
+        Path path =
+            Path.of("src", "bg", "sofia", "uni", "fmi", "mjt", "crypto",
+                "api", "key", "config.properties");
+
+        Properties properties = new Properties();
+
+        try (InputStream inputStream = new FileInputStream(path.toFile())) {
+            properties.load(inputStream);
+            return properties.getProperty("API_KEY");
+        } catch (IOException e) {
+            throw new ApiException(e.getMessage());
+        }
     }
 
 }
