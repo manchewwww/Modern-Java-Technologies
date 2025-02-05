@@ -39,7 +39,11 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User getUser(String username) {
+    public User getUser(String username) throws UserDoesNotExistsException {
+        if (!userExists(username)) {
+            throw new UserDoesNotExistsException(String.format(ErrorMessages.USER_DOES_NOT_EXISTS_MESSAGE, username));
+        }
+
         return users.get(username);
     }
 
