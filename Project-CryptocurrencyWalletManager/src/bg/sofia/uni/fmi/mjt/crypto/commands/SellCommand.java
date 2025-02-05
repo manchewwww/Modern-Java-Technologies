@@ -1,7 +1,10 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
+import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
+import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
+import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
 import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
@@ -14,22 +17,27 @@ public class SellCommand implements Command {
     private final UserRepository userRepository;
     private final SocketChannel socketChannel;
     private final CacheData cacheData;
+    private final UserSessionManager userSessionManager;
 
-    public SellCommand(UserRepository userRepository, SocketChannel socketChannel, CacheData cacheData) {
+    public SellCommand(UserRepository userRepository, UserSessionManager userSessionManager,
+                       SocketChannel socketChannel, CacheData cacheData) {
         this.userRepository = userRepository;
         this.socketChannel = socketChannel;
         this.cacheData = cacheData;
+        this.userSessionManager = userSessionManager;
+
     }
 
     @Override
     public String execute(String[] args)
-        throws InvalidCountOfArgumentsException, CryptoNotFoundException {
+        throws InvalidCountOfArgumentsException, CryptoNotFoundException, InvalidAmountException, NotLoginException,
+        UserDoesNotExistsException {
         if (args.length != 1) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }
 
         String assetId = args[0];
-        String username = UserSessionManager.getUsername(socketChannel);
+        String username = userSessionManager.getUsername(socketChannel);
 
         return userRepository.getUser(username).sellCrypto(assetId, cacheData.getPriceFromAssetId(assetId));
     }

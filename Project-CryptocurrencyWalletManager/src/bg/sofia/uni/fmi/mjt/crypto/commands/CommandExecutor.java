@@ -2,36 +2,46 @@ package bg.sofia.uni.fmi.mjt.crypto.commands;
 
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InsufficientFundsException;
-import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountOfDepositException;
+import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCommandException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
+import bg.sofia.uni.fmi.mjt.crypto.exceptions.LoginException;
+import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
+import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
 
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
 
 public class CommandExecutor {
 
+    private static final int COMMAND_INDEX = 0;
+    private static final int SKIP_ELEMENTS = 1;
+
     private final CommandFactory commandFactory;
 
-    public CommandExecutor(UserRepository userRepository, DataRepository dataRepository) {
-        this.commandFactory = new CommandFactory(userRepository, dataRepository);
+    public CommandExecutor(UserRepository userRepository, DataRepository dataRepository,
+                           UserSessionManager userSessionManager) {
+        this.commandFactory = new CommandFactory(userRepository, dataRepository, userSessionManager);
     }
 
     public String execute(String line, SocketChannel socketChannel)
-        throws UserExistsException, InvalidAmountOfDepositException, UserDoesNotExistsException,
-        InvalidCommandException, InvalidCountOfArgumentsException, InsufficientFundsException, CryptoNotFoundException {
-        line = line.replaceAll(System.lineSeparator(), "");
-        String[] args = line.split(" ");
-        if (args.length == 0) {
-            return "\"{\"status\":\"ERROR\",\"message\":\"Invalid command\"}\"";
+        throws UserExistsException, InvalidAmountException, UserDoesNotExistsException,
+        InvalidCommandException, InvalidCountOfArgumentsException, InsufficientFundsException, CryptoNotFoundException,
+        NotLoginException, LoginException {
+        if (line == null) {
+            throw new IllegalArgumentException("Line cannot be null");
         }
-        String command = args[0];
+        line = line.replaceAll(System.lineSeparator(), "");
+        line = line.trim();
+        String[] args = line.split(" ");
+        String command = args[COMMAND_INDEX];
+
         args = Arrays.stream(args)
-            .skip(1)
+            .skip(SKIP_ELEMENTS)
             .filter(s -> !s.isBlank())
             .toArray(String[]::new);
 
