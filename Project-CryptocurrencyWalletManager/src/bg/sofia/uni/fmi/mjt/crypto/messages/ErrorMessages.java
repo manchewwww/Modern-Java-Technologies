@@ -28,4 +28,11 @@ public class ErrorMessages {
     public static final String YOU_ARE_LOGIN_MESSAGE = "You are logged in profile!";
     public static final String YOU_ARE_NOT_LOGIN_MESSAGE = "You are not logged in profile!";
 
+    public static final String INVALID_DEPOSIT_AMOUNT_MESSAGE = "Deposit amount must be greater than 0.0";
+    public static final String INVALID_CURRENT_PRICE_MESSAGE = "Current price must be greater than zero.";
+    public static final String CRYPTO_ASSETS_ID_NULL_MESSAGE = "Crypto asset id cannot be null.";
+    public static final String INSUFFICIENT_BALANCE_MESSAGE = "You don't have enough money.";
+    public static final String CURRENT_PRICES_NULL_MESSAGE = "currentPrices cannot be null";
+    public static final String NO_INVESTMENTS_FOUND_MESSAGE = "No investments found.";
+
 }
