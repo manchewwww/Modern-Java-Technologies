@@ -16,17 +16,14 @@ public class CommandExecutorTest {
 
     private CommandExecutor commandExecutor;
 
-    private UserRepository mockUserRepository;
-    private DataRepository mockDataRepository;
     private SocketChannel mockSocketChannel;
-    private UserSessionManager mockUserSessionManager;
 
     @BeforeEach
     public void setUp() {
-        mockDataRepository = mock();
-        mockUserRepository = mock();
+        DataRepository mockDataRepository = mock();
+        UserRepository mockUserRepository = mock();
         mockSocketChannel = mock();
-        mockUserSessionManager = mock();
+        UserSessionManager mockUserSessionManager = mock();
 
         commandExecutor = new CommandExecutor(mockUserRepository, mockDataRepository, mockUserSessionManager);
     }
