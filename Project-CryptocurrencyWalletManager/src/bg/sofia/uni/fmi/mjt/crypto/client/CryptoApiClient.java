@@ -9,9 +9,16 @@ import java.util.Scanner;
 
 public class CryptoApiClient {
 
+    private static final String WELCOME_MESSAGE = "Welcome to the Cryptocurrency Wallet Manager!";
+    private static final String LINE_SYMBOL = "$ ";
+    private static final String DISCONNECTING_MESSAGE = "Disconnecting.";
+    private static final String PROBLEM_WITH_COMMUNICATION_MESSAGE = "There is a problem with the network communication";
+    private static final String CLIENT_STOP_MESSAGE = "exit";
+    private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
+
     private static final int SERVER_PORT = 8888;
     private static final String SERVER_HOST = "localhost";
-    private static final int BUFFER_SIZE = 1024;
+    private static final int BUFFER_SIZE = 102400000;
 
     private static final ByteBuffer BUFFER = ByteBuffer.allocateDirect(BUFFER_SIZE);
 
@@ -19,26 +26,26 @@ public class CryptoApiClient {
         try (SocketChannel socketChannel = SocketChannel.open();
              Scanner scanner = new Scanner(System.in)) {
             socketChannel.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
-            System.out.println("Welcome to the Cryptocurrency Wallet Manager!");
+            System.out.println(WELCOME_MESSAGE);
             while (true) {
-                System.out.print("$ ");
+                System.out.print(LINE_SYMBOL);
                 String message = scanner.nextLine();
                 if (message.isEmpty()) {
-                    System.out.println("Enter valid command!");
+                    System.out.println(INVALID_COMMAND_MESSAGE);
                     continue;
                 }
-                if ("exit".equals(message)) {
-                    System.out.println("Disconnecting.");
+                if (CLIENT_STOP_MESSAGE.equals(message)) {
+                    System.out.println(DISCONNECTING_MESSAGE);
                     break;
                 }
 
                 sendMessage(socketChannel, message);
-                
                 String reply = readMessage(socketChannel);
+
                 System.out.println(reply);
             }
         } catch (IOException e) {
-            throw new RuntimeException("There is a problem with the network communication", e);
+            throw new RuntimeException(PROBLEM_WITH_COMMUNICATION_MESSAGE, e);
         }
     }
 
@@ -59,6 +66,5 @@ public class CryptoApiClient {
 
         return new String(byteArray, StandardCharsets.UTF_8);
     }
-
 
 }
