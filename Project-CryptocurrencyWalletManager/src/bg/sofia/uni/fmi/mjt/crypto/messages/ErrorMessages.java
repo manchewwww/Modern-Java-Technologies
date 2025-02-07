@@ -35,4 +35,6 @@ public class ErrorMessages {
     public static final String CURRENT_PRICES_NULL_MESSAGE = "currentPrices cannot be null";
     public static final String NO_INVESTMENTS_FOUND_MESSAGE = "No investments found.";
 
+    public static final String NULL_LINE = "Line cannot be null";
+
 }
