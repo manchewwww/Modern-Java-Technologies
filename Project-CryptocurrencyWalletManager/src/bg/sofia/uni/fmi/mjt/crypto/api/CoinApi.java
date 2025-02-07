@@ -5,7 +5,6 @@ import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
 import bg.sofia.uni.fmi.mjt.crypto.api.exceptions.ApiException;
 import bg.sofia.uni.fmi.mjt.crypto.api.factory.StatusCodeFactory;
 import bg.sofia.uni.fmi.mjt.crypto.api.request.BuildRequest;
-import com.google.gson.Gson;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,7 +17,7 @@ import java.util.Properties;
 
 public class CoinApi {
 
-    private static final Gson GSON = new Gson();
+    private static final String API_KEY = "API_KEY";
 
     private final HttpClient httpClient;
     private final String apiKey;
@@ -53,7 +52,7 @@ public class CoinApi {
 
         try (InputStream inputStream = new FileInputStream(path.toFile())) {
             properties.load(inputStream);
-            return properties.getProperty("API_KEY");
+            return properties.getProperty(API_KEY);
         } catch (IOException e) {
             throw new ApiException(e.getMessage());
         }
