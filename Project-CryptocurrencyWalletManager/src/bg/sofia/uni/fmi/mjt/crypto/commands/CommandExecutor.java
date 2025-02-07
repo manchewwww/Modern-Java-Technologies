@@ -9,6 +9,7 @@ import bg.sofia.uni.fmi.mjt.crypto.exceptions.LoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserExistsException;
+import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
 import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
@@ -17,6 +18,9 @@ import java.nio.channels.SocketChannel;
 import java.util.Arrays;
 
 public class CommandExecutor {
+
+    private static final String SPLIT_SYMBOL = " ";
+    private static final String REPLACEMENT_SYMBOL = "";
 
     private static final int COMMAND_INDEX = 0;
     private static final int SKIP_ELEMENTS = 1;
@@ -33,11 +37,11 @@ public class CommandExecutor {
         InvalidCommandException, InvalidCountOfArgumentsException, InsufficientFundsException, CryptoNotFoundException,
         NotLoginException, LoginException {
         if (line == null) {
-            throw new IllegalArgumentException("Line cannot be null");
+            throw new IllegalArgumentException(ErrorMessages.NULL_LINE);
         }
-        line = line.replaceAll(System.lineSeparator(), "");
+        line = line.replaceAll(System.lineSeparator(), REPLACEMENT_SYMBOL);
         line = line.trim();
-        String[] args = line.split(" ");
+        String[] args = line.split(SPLIT_SYMBOL);
         String command = args[COMMAND_INDEX];
 
         args = Arrays.stream(args)
