@@ -55,7 +55,7 @@ public class Wallet {
 
             cryptoInvestments.putIfAbsent(assetId, new ArrayList<>());
             cryptoInvestments.get(assetId)
-                .add(new Crypto(assetId, currentPrice, TYPE_CRYPTO, amount / currentPrice));
+                .add(Crypto.of(assetId, currentPrice, TYPE_CRYPTO, amount / currentPrice));
         }
     }
 

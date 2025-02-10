@@ -21,8 +21,8 @@ public class CacheDataTest {
     @BeforeEach
     public void setUp() {
         List<Crypto> cryptos = List.of(
-            new Crypto("BTC", 10000.20, 1, 0),
-            new Crypto("ETH", 10000.20, 1, 0));
+            Crypto.of("BTC", 10000.20, 1, 0),
+            Crypto.of("ETH", 10000.20, 1, 0));
 
         cacheData = new CacheData(cryptos);
         cryptosToJSON = GSON.toJson(cryptos);

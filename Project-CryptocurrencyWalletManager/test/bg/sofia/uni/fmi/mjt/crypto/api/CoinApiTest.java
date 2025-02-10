@@ -65,9 +65,9 @@ public class CoinApiTest {
     @Test
     public void testGetResponseWithStatusCodeOK() throws ApiException {
         List<Crypto> cryptos = new ArrayList<>();
-        cryptos.add(new Crypto("BTC", 100, 1, 0));
-        cryptos.add(new Crypto("USD", 100, 0, 0));
-        cryptos.add(new Crypto("ETH", 100, 1, 0));
+        cryptos.add(Crypto.of("BTC", 100, 1, 0));
+        cryptos.add(Crypto.of("USD", 100, 0, 0));
+        cryptos.add(Crypto.of("ETH", 100, 1, 0));
         String cryptosToJSON = gson.toJson(cryptos);
 
         cryptos.remove(1);

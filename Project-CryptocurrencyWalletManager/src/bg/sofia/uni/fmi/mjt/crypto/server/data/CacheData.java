@@ -19,7 +19,7 @@ public class CacheData {
     public CacheData(List<Crypto> availableCryptos) {
         this.availableCryptos = availableCryptos.stream()
             .filter(x -> x.typeIsCrypto() == 1)
-            .collect(Collectors.toMap(Crypto::assetId, cr -> new Crypto(cr.assetId(), cr.priceUsd(),
+            .collect(Collectors.toMap(Crypto::assetId, cr -> Crypto.of(cr.assetId(), cr.priceUsd(),
                 cr.typeIsCrypto(), 0)));
     }
 
