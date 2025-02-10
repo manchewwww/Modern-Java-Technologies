@@ -1,11 +1,13 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
+import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
 import bg.sofia.uni.fmi.mjt.crypto.user.User;
 import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
@@ -36,8 +38,12 @@ public class SellCommandTest {
         mockUserSessionManager = mock();
         mockUser = mock();
         mockCacheData = mock();
+        DataRepository mockDataRepository = mock();
+        when(mockDataRepository.getCacheData()).thenReturn(mockCacheData);
 
-        command = new SellCommand(mockUserRepository, mockUserSessionManager, mockSocketChannel, mockCacheData);
+        Arguments arguments = Arguments.builder(mockUserRepository, mockDataRepository, mockUserSessionManager).build();
+
+        command = new SellCommand(arguments, mockSocketChannel);
     }
 
     @Test

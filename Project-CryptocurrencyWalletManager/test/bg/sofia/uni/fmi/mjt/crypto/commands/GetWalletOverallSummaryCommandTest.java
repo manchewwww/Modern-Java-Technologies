@@ -1,10 +1,12 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
+import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
 import bg.sofia.uni.fmi.mjt.crypto.user.User;
 import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
@@ -36,9 +38,12 @@ public class GetWalletOverallSummaryCommandTest {
         mockUser = mock();
         mockCacheData = mock();
         SocketChannel mockSocketChanel = mock();
+        DataRepository mockDataRepository = mock();
+        when(mockDataRepository.getCacheData()).thenReturn(mockCacheData);
 
-        command = new GetWalletOverallSummaryCommand(mockUserRepository, mockUserSessionManager, mockSocketChanel,
-            mockCacheData);
+        Arguments arguments = Arguments.builder(mockUserRepository, mockDataRepository, mockUserSessionManager).build();
+
+        command = new GetWalletOverallSummaryCommand(arguments, mockSocketChanel);
     }
 
     @Test

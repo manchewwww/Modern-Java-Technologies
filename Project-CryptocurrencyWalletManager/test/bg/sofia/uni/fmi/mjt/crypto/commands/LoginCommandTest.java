@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.LoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
@@ -27,8 +28,9 @@ public class LoginCommandTest {
         mockSocketChannel = mock();
         mockUserRepository = mock();
         mockUserSessionManager = mock();
+        Arguments arguments = Arguments.builder(mockUserRepository, null, mockUserSessionManager).build();
 
-        command = new LoginCommand(mockUserRepository, mockUserSessionManager, mockSocketChannel);
+        command = new LoginCommand(arguments, mockSocketChannel);
     }
 
     @Test

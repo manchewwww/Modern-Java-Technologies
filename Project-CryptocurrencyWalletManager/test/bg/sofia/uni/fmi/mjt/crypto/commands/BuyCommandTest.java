@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InsufficientFundsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
@@ -27,21 +28,24 @@ public class BuyCommandTest {
     private static BuyCommand command;
 
     private static UserRepository mockUserRepository;
-    private static DataRepository mockDataRepository;
     private static UserSessionManager mockUserSessionManager;
     private static User mockUser;
     private static CacheData mockCacheData;
 
     @BeforeAll
     public static void setUp() {
-        mockDataRepository = mock();
         mockUserRepository = mock();
         SocketChannel mockSocketChannel = mock();
         mockUserSessionManager = mock();
         mockUser = mock();
         mockCacheData = mock();
 
-        command = new BuyCommand(mockUserRepository, mockUserSessionManager, mockSocketChannel, mockCacheData);
+        DataRepository mockDataRepository = mock();
+        when(mockDataRepository.getCacheData()).thenReturn(mockCacheData);
+
+        Arguments arguments = Arguments.builder(mockUserRepository, mockDataRepository, mockUserSessionManager).build();
+
+        command = new BuyCommand(arguments, mockSocketChannel);
     }
 
     @Test
@@ -60,7 +64,6 @@ public class BuyCommandTest {
 
         String result = "The purchase is successful!";
 
-        when(mockDataRepository.getCacheData()).thenReturn(mockCacheData);
         when(mockCacheData.getPriceFromAssetId("BTC")).thenReturn(1000.0);
         when(mockUserSessionManager.getUsername(any())).thenReturn("ivan");
         when(mockUserRepository.getUser("ivan")).thenReturn(mockUser);

@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
@@ -31,7 +32,10 @@ public class GetWalletSummaryCommandTest {
         mockUserSessionManager = mock();
         mockUser = mock();
         SocketChannel mockSocketChanel = mock();
-        command = new GetWalletSummaryCommand(mockUserRepository, mockUserSessionManager, mockSocketChanel);
+
+        Arguments arguments = Arguments.builder(mockUserRepository, null, mockUserSessionManager).build();
+
+        command = new GetWalletSummaryCommand(arguments, mockSocketChanel);
     }
 
     @Test

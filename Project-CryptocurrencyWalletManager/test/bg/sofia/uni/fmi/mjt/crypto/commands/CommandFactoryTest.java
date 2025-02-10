@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCommandException;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
@@ -24,7 +25,9 @@ public class CommandFactoryTest {
         DataRepository dataRepository = mock();
         UserSessionManager userSessionManager = mock();
         socketChannel = mock();
-        commandFactory = new CommandFactory(userRepository, dataRepository, userSessionManager);
+        Arguments arguments = Arguments.builder(userRepository, dataRepository, userSessionManager).build();
+
+        commandFactory = new CommandFactory(arguments);
     }
 
     @Test

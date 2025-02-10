@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCommandException;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
@@ -24,8 +25,9 @@ public class CommandExecutorTest {
         UserRepository mockUserRepository = mock();
         mockSocketChannel = mock();
         UserSessionManager mockUserSessionManager = mock();
+        Arguments arguments = Arguments.builder(mockUserRepository, mockDataRepository, mockUserSessionManager).build();
 
-        commandExecutor = new CommandExecutor(mockUserRepository, mockDataRepository, mockUserSessionManager);
+        commandExecutor = new CommandExecutor(arguments);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
@@ -23,8 +24,10 @@ public class LogoutCommandTest {
     public static void setUp() {
         mockUserSessionManager = mock();
         mockSocketChannel = mock();
+        Arguments arguments = Arguments.builder(null, null, mockUserSessionManager).build();
 
-        command = new LogoutCommand(mockUserSessionManager, mockSocketChannel);
+
+        command = new LogoutCommand(arguments, mockSocketChannel);
     }
 
     @Test

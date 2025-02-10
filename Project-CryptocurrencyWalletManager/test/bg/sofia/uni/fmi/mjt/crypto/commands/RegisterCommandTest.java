@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
@@ -19,7 +20,8 @@ public class RegisterCommandTest {
     @BeforeAll
     public static void setUp() {
         mockUserRepository = mock();
-        command = new RegisterCommand(mockUserRepository);
+        Arguments arguments = Arguments.builder(mockUserRepository, null, null).build();
+        command = new RegisterCommand(arguments);
     }
 
     @Test

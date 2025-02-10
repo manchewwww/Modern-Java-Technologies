@@ -1,6 +1,9 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
+
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
+import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +20,11 @@ public class ListOfferingsCommandTest {
     @BeforeAll
     public static void setUp() {
         mockCacheData = mock();
+        DataRepository mockDataRepository = mock();
+        when(mockDataRepository.getCacheData()).thenReturn(mockCacheData);
+        Arguments arguments = Arguments.builder(null, mockDataRepository, null).build();
 
-        command = new ListOfferingsCommand(mockCacheData);
+        command = new ListOfferingsCommand(arguments);
     }
 
     @Test

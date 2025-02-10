@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
@@ -33,7 +34,9 @@ public class DepositMoneyCommandTest {
         mockUserSessionManager = mock();
         mockUser = mock();
 
-        command = new DepositMoneyCommand(mockUserRepository, mockUserSessionManager, mockSocketChannel);
+        Arguments arguments = Arguments.builder(mockUserRepository, null, mockUserSessionManager).build();
+
+        command = new DepositMoneyCommand(arguments, mockSocketChannel);
     }
 
     @Test
