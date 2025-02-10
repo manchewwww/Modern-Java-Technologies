@@ -41,6 +41,8 @@ public class CryptoApiServer {
     private static final String ERROR_IN_CLIENT_REQUEST_MESSAGE = "Error occurred while processing client request: %s";
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command";
     private static final String INVALID_AMOUNT_MESSAGE = "Amount is not a number!";
+    private static final int MIN_AVAILABLE_CHANNELS = 0;
+    private static final int MIN_BYTES_FOR_READS = 0;
 
     private static final int SERVER_PORT = 8888;
     private static final int BUFFER_SIZE = 10240;
@@ -59,8 +61,8 @@ public class CryptoApiServer {
     public CryptoApiServer(int port) throws ApiException {
         this.port = port;
         userRepository = LoadUserRepositoryFromFile.loadData();
-        dataRepository = new InMemoryDataRepository();
         UserSessionManager userSessionManager = new UserSessionManager();
+        dataRepository = new InMemoryDataRepository(this);
         Arguments arguments = Arguments.builder(userRepository, dataRepository, userSessionManager).build();
         this.commandExecutor = new CommandExecutor(arguments);
     }
@@ -74,6 +76,7 @@ public class CryptoApiServer {
             System.out.println(TO_EXIT_MESSAGE);
             while (true) {
                 String input = scanner.nextLine();
+
                 if (COMMAND_FOR_STOP.equalsIgnoreCase(input)) {
                     try {
                         server.stop();
@@ -98,10 +101,12 @@ public class CryptoApiServer {
             configureServerSocketChannel(serverSocketChannel, selector);
             this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
             isServerWorking = true;
+            dataRepository.startScheduleAtFixedRate();
+            
             while (isServerWorking) {
                 try {
                     int readyChannels = selector.select();
-                    if (readyChannels == 0) {
+                    if (readyChannels == MIN_AVAILABLE_CHANNELS) {
                         continue;
                     }
 
@@ -164,7 +169,7 @@ public class CryptoApiServer {
         buffer.clear();
 
         int readBytes = clientChannel.read(buffer);
-        if (readBytes < 0) {
+        if (readBytes < MIN_BYTES_FOR_READS) {
             clientChannel.close();
             return null;
         }
