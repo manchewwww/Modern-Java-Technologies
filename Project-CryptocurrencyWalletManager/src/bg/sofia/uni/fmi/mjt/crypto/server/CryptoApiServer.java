@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.server;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.commands.CommandExecutor;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InsufficientFundsException;
@@ -60,7 +61,8 @@ public class CryptoApiServer {
         userRepository = LoadUserRepositoryFromFile.loadData();
         dataRepository = new InMemoryDataRepository();
         UserSessionManager userSessionManager = new UserSessionManager();
-        this.commandExecutor = new CommandExecutor(userRepository, dataRepository, userSessionManager);
+        Arguments arguments = Arguments.builder(userRepository, dataRepository, userSessionManager).build();
+        this.commandExecutor = new CommandExecutor(arguments);
     }
 
     public static void main(String[] args) throws ApiException {
