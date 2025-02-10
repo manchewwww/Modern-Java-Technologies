@@ -6,6 +6,8 @@ public interface DataRepository {
 
     CacheData getCacheData();
 
+    void startScheduleAtFixedRate();
+
     void shutdown();
 
 }
