@@ -1,45 +1,41 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
-import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
-import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
-import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
 
 import java.nio.channels.SocketChannel;
 
 public class SellCommand implements Command {
 
-    private final UserRepository userRepository;
+    private static final int ARGS_LENGTH = 1;
+    private static final int ASSET_ID_INDEX = 0;
+
+    private final Arguments arguments;
     private final SocketChannel socketChannel;
-    private final CacheData cacheData;
-    private final UserSessionManager userSessionManager;
 
-    public SellCommand(UserRepository userRepository, UserSessionManager userSessionManager,
-                       SocketChannel socketChannel, CacheData cacheData) {
-        this.userRepository = userRepository;
+    public SellCommand(Arguments arguments, SocketChannel socketChannel) {
+        this.arguments = arguments;
         this.socketChannel = socketChannel;
-        this.cacheData = cacheData;
-        this.userSessionManager = userSessionManager;
-
     }
 
     @Override
     public String execute(String[] args)
         throws InvalidCountOfArgumentsException, CryptoNotFoundException, InvalidAmountException, NotLoginException,
         UserDoesNotExistsException {
-        if (args.length != 1) {
+        if (args.length != ARGS_LENGTH) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }
 
-        String assetId = args[0];
-        String username = userSessionManager.getUsername(socketChannel);
+        String assetId = args[ASSET_ID_INDEX];
+        String username = arguments.getUserSessionManager().getUsername(socketChannel);
 
-        return userRepository.getUser(username).sellCrypto(assetId, cacheData.getPriceFromAssetId(assetId));
+        return arguments.getUserRepository().getUser(username)
+            .sellCrypto(assetId, arguments.getDataRepository().getCacheData().getPriceFromAssetId(assetId));
     }
 
 }

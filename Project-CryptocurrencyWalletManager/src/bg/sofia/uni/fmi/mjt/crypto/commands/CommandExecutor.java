@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InsufficientFundsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
@@ -10,9 +11,6 @@ import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
-import bg.sofia.uni.fmi.mjt.crypto.server.repository.DataRepository;
-import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
-import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
 
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
@@ -27,9 +25,8 @@ public class CommandExecutor {
 
     private final CommandFactory commandFactory;
 
-    public CommandExecutor(UserRepository userRepository, DataRepository dataRepository,
-                           UserSessionManager userSessionManager) {
-        this.commandFactory = new CommandFactory(userRepository, dataRepository, userSessionManager);
+    public CommandExecutor(Arguments arguments) {
+        this.commandFactory = new CommandFactory(arguments);
     }
 
     public String execute(String line, SocketChannel socketChannel)

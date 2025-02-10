@@ -5,9 +5,11 @@ import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
 
 public class HelpCommand implements Command {
 
+    private static final int ARGS_LENGTH = 0;
+
     @Override
     public String execute(String[] args) throws InvalidCountOfArgumentsException {
-        if (args.length != 0) {
+        if (args.length != ARGS_LENGTH) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }
 

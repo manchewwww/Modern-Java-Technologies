@@ -1,39 +1,38 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidAmountException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
-import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
-import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
 
 import java.nio.channels.SocketChannel;
 
 public class DepositMoneyCommand implements Command {
 
-    private final UserRepository userRepository;
-    private final SocketChannel socketChannel;
-    private final UserSessionManager userSessionManager;
+    private static final int ARGS_LENGTH = 1;
+    private static final int AMOUNT_INDEX = 0;
 
-    public DepositMoneyCommand(UserRepository userRepository, UserSessionManager userSessionManager,
-                               SocketChannel socketChannel) {
-        this.userRepository = userRepository;
+    private final Arguments arguments;
+    private final SocketChannel socketChannel;
+
+    public DepositMoneyCommand(Arguments arguments, SocketChannel socketChannel) {
+        this.arguments = arguments;
         this.socketChannel = socketChannel;
-        this.userSessionManager = userSessionManager;
     }
 
     @Override
     public String execute(String[] args)
         throws InvalidAmountException, InvalidCountOfArgumentsException, NotLoginException, UserDoesNotExistsException {
-        if (args.length != 1) {
+        if (args.length != ARGS_LENGTH) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }
 
-        double amount = Double.parseDouble(args[0]);
-        String username = userSessionManager.getUsername(socketChannel);
+        double amount = Double.parseDouble(args[AMOUNT_INDEX]);
+        String username = arguments.getUserSessionManager().getUsername(socketChannel);
 
-        return userRepository.getUser(username).depositMoney(amount);
+        return arguments.getUserRepository().getUser(username).depositMoney(amount);
     }
 
 }

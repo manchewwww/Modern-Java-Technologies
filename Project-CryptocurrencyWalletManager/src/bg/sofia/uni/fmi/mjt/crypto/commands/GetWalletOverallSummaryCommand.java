@@ -1,42 +1,38 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.CryptoNotFoundException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.NotLoginException;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.UserDoesNotExistsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
-import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
-import bg.sofia.uni.fmi.mjt.crypto.server.repository.UserRepository;
-import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
 
 import java.nio.channels.SocketChannel;
 
 public class GetWalletOverallSummaryCommand implements Command {
 
-    private final UserRepository userRepository;
-    private final SocketChannel socketChannel;
-    private final CacheData cacheData;
-    private final UserSessionManager userSessionManager;
+    private static final int ARGS_LENGTH = 0;
 
-    public GetWalletOverallSummaryCommand(UserRepository userRepository, UserSessionManager userSessionManager,
-                                          SocketChannel socketChannel, CacheData cacheData) {
-        this.userRepository = userRepository;
+    private final Arguments arguments;
+    private final SocketChannel socketChannel;
+
+    public GetWalletOverallSummaryCommand(Arguments arguments, SocketChannel socketChannel) {
+        this.arguments = arguments;
         this.socketChannel = socketChannel;
-        this.cacheData = cacheData;
-        this.userSessionManager = userSessionManager;
     }
 
     @Override
     public String execute(String[] args)
         throws InvalidCountOfArgumentsException, CryptoNotFoundException, NotLoginException,
         UserDoesNotExistsException {
-        if (args.length != 0) {
+        if (args.length != ARGS_LENGTH) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }
 
-        String username = userSessionManager.getUsername(socketChannel);
+        String username = arguments.getUserSessionManager().getUsername(socketChannel);
 
-        return userRepository.getUser(username).getWalletOverallSummary(cacheData.getPrices());
+        return arguments.getUserRepository().getUser(username)
+            .getWalletOverallSummary(arguments.getDataRepository().getCacheData().getPrices());
     }
 
 }

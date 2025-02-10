@@ -1,24 +1,26 @@
 package bg.sofia.uni.fmi.mjt.crypto.commands;
 
+import bg.sofia.uni.fmi.mjt.crypto.builder.Arguments;
 import bg.sofia.uni.fmi.mjt.crypto.exceptions.InvalidCountOfArgumentsException;
 import bg.sofia.uni.fmi.mjt.crypto.messages.ErrorMessages;
-import bg.sofia.uni.fmi.mjt.crypto.server.data.CacheData;
 
 public class ListOfferingsCommand implements Command {
 
-    private final CacheData cacheData;
+    private static final int ARGS_LENGTH = 0;
 
-    public ListOfferingsCommand(CacheData cacheData) {
-        this.cacheData = cacheData;
+    private final Arguments arguments;
+
+    public ListOfferingsCommand(Arguments arguments) {
+        this.arguments = arguments;
     }
 
     @Override
     public String execute(String[] args) throws InvalidCountOfArgumentsException {
-        if (args.length != 0) {
+        if (args.length != ARGS_LENGTH) {
             throw new InvalidCountOfArgumentsException(ErrorMessages.INVALID_NUMBER_OF_ARGUMENTS);
         }
 
-        return cacheData.listOfferings();
+        return arguments.getDataRepository().getCacheData().listOfferings();
     }
 
 }
