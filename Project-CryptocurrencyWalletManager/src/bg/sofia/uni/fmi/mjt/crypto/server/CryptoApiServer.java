@@ -19,8 +19,10 @@ import bg.sofia.uni.fmi.mjt.crypto.server.reader.LoadUserRepositoryFromFile;
 import bg.sofia.uni.fmi.mjt.crypto.server.writer.WriteUserRepositoryToFile;
 import bg.sofia.uni.fmi.mjt.crypto.user.UserSessionManager;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.io.Writer;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
@@ -28,10 +30,16 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class CryptoApiServer {
+
+    private static final Path
+        PATH_TO_FILE_FOR_ERRORS =
+        Path.of("src", "bg", "sofia", "uni", "fmi", "mjt", "crypto", "server", "file", "error.txt");
 
     private static final String TO_EXIT_MESSAGE = "Type 'exit' to stop the server.";
     private static final String COMMAND_FOR_STOP = "exit";
@@ -41,6 +49,7 @@ public class CryptoApiServer {
     private static final String ERROR_IN_CLIENT_REQUEST_MESSAGE = "Error occurred while processing client request: %s";
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command";
     private static final String INVALID_AMOUNT_MESSAGE = "Amount is not a number!";
+    private static final String NULL_CLIENT_INPUT = "Null client input";
     private static final int MIN_AVAILABLE_CHANNELS = 0;
     private static final int MIN_BYTES_FOR_READS = 0;
 
@@ -143,24 +152,25 @@ public class CryptoApiServer {
                 SocketChannel clientChannel = (SocketChannel) key.channel();
                 String clientInput = getClientInput(clientChannel);
                 if (clientInput == null) {
+                    saveError(NULL_CLIENT_INPUT + System.lineSeparator() + clientChannel.toString());
                     writeClientOutput(clientChannel, INVALID_COMMAND_MESSAGE);
                     continue;
                 }
-
                 try {
                     String output = commandExecutor.execute(clientInput, clientChannel);
                     writeClientOutput(clientChannel, output);
                 } catch (UserExistsException | InvalidAmountException | UserDoesNotExistsException |
                          InvalidCommandException | InvalidCountOfArgumentsException | InsufficientFundsException |
                          CryptoNotFoundException | NotLoginException | LoginException e) {
+                    saveError(Arrays.toString(e.getStackTrace()) + System.lineSeparator() + clientChannel.toString());
                     writeClientOutput(clientChannel, e.getMessage());
                 } catch (NumberFormatException e) {
+                    saveError(Arrays.toString(e.getStackTrace()) + System.lineSeparator() + clientChannel.toString());
                     writeClientOutput(clientChannel, INVALID_AMOUNT_MESSAGE);
                 }
             } else if (key.isAcceptable()) {
                 accept(selector, key);
             }
-
             keyIterator.remove();
         }
     }
@@ -196,6 +206,14 @@ public class CryptoApiServer {
 
         accept.configureBlocking(false);
         accept.register(selector, SelectionKey.OP_READ);
+    }
+
+    public void saveError(String message) throws IOException {
+        try (Writer writer = new FileWriter(PATH_TO_FILE_FOR_ERRORS.toFile(), true)) {
+            writer.write(message);
+            writer.write(System.lineSeparator());
+            writer.flush();
+        }
     }
 
 }
