@@ -7,6 +7,7 @@ import bg.sofia.uni.fmi.mjt.crypto.api.exceptions.ApiException;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +44,8 @@ public class InMemoryDataRepository implements DataRepository {
             } catch (ApiException e) {
                 try {
                     cryptoApiServer.stop();
+                    cryptoApiServer.saveError(
+                        Arrays.toString(e.getStackTrace()) + System.lineSeparator() + e.getMessage());
                     System.out.println("Api can not load data!");
                     System.exit(1);
                 } catch (IOException ex) {
