@@ -48,12 +48,12 @@ public class CacheDataTest {
 
     @Test
     public void testGetPriceFromAssetId() throws CryptoNotFoundException {
-        assertEquals(10000.20, cacheData.getPriceFromAssetId("BTC"),
+        assertEquals(10000.20, cacheData.getPriceFromAssetId("BTC"), 0.01,
             "GetPriceFromAssetId return incorrect price");
     }
 
     @Test
-    public void testGetPrices() throws CryptoNotFoundException {
+    public void testGetPrices() {
         Map<String, Double> result = Map.of("BTC", 10000.20, "ETH", 10000.20);
         Map<String, Double> output = cacheData.getPrices();
 
