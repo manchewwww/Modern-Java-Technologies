@@ -44,17 +44,17 @@ public class CoinApi {
     }
 
     private String loadApiKey() throws ApiException {
-        Path path =
+        Path pathProperties =
             Path.of("src", "bg", "sofia", "uni", "fmi", "mjt", "crypto",
                 "api", "key", "config.properties");
 
         Properties properties = new Properties();
 
-        try (InputStream inputStream = new FileInputStream(path.toFile())) {
+        try (InputStream inputStream = new FileInputStream(pathProperties.toFile())) {
             properties.load(inputStream);
             return properties.getProperty(API_KEY);
         } catch (IOException e) {
-            throw new ApiException(e.getMessage());
+            throw new ApiException("Failed to load api key from api properties file: " + pathProperties.toString(), e);
         }
     }
 
