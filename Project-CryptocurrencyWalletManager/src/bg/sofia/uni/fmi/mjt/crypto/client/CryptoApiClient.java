@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.mjt.crypto.client;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
@@ -12,7 +13,8 @@ public class CryptoApiClient {
     private static final String WELCOME_MESSAGE = "Welcome to the Cryptocurrency Wallet Manager!";
     private static final String LINE_SYMBOL = "$ ";
     private static final String DISCONNECTING_MESSAGE = "Disconnecting.";
-    private static final String PROBLEM_WITH_COMMUNICATION_MESSAGE = "There is a problem with the network communication";
+    private static final String PROBLEM_WITH_COMMUNICATION_MESSAGE
+        = "There is a problem with the network communication";
     private static final String CLIENT_STOP_MESSAGE = "exit";
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
 
@@ -24,12 +26,12 @@ public class CryptoApiClient {
 
     public static void main(String[] args) {
         try (SocketChannel socketChannel = SocketChannel.open();
-             Scanner scanner = new Scanner(System.in)) {
+             Scanner commandInput = new Scanner(System.in)) {
             socketChannel.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
             System.out.println(WELCOME_MESSAGE);
             while (true) {
                 System.out.print(LINE_SYMBOL);
-                String message = scanner.nextLine();
+                String message = commandInput.nextLine();
                 if (message.isEmpty()) {
                     System.out.println(INVALID_COMMAND_MESSAGE);
                     continue;
@@ -45,7 +47,7 @@ public class CryptoApiClient {
                 System.out.println(reply);
             }
         } catch (IOException e) {
-            throw new RuntimeException(PROBLEM_WITH_COMMUNICATION_MESSAGE, e);
+            throw new UncheckedIOException(PROBLEM_WITH_COMMUNICATION_MESSAGE, e);
         }
     }
 
