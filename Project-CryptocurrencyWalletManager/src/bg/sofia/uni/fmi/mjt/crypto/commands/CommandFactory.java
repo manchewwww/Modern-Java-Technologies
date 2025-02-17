@@ -14,18 +14,19 @@ public class CommandFactory {
     }
 
     public Command getCommand(String command, SocketChannel channel) throws InvalidCommandException {
-        return switch (command) {
-            case "help" -> new HelpCommand();
-            case "register" -> new RegisterCommand(arguments);
-            case "login" -> new LoginCommand(arguments, channel);
-            case "logout" -> new LogoutCommand(arguments, channel);
-            case "deposit-money" -> new DepositMoneyCommand(arguments, channel);
-            case "buy" -> new BuyCommand(arguments, channel);
-            case "sell" -> new SellCommand(arguments, channel);
-            case "list-offerings" -> new ListOfferingsCommand(arguments);
-            case "get-wallet-summary" -> new GetWalletSummaryCommand(arguments, channel);
-            case "get-wallet-overall-summary" -> new GetWalletOverallSummaryCommand(arguments, channel);
-            default -> throw new InvalidCommandException("Invalid command: " + command);
+        CommandType commandType = CommandType.getCommandType(command);
+        return switch (commandType) {
+            case HELP-> new HelpCommand();
+            case REGISTER -> new RegisterCommand(arguments);
+            case LOGIN -> new LoginCommand(arguments, channel);
+            case LOGOUT -> new LogoutCommand(arguments, channel);
+            case DEPOSIT -> new DepositMoneyCommand(arguments, channel);
+            case BUY -> new BuyCommand(arguments, channel);
+            case SELL -> new SellCommand(arguments, channel);
+            case LIST -> new ListOfferingsCommand(arguments);
+            case WALLET_SUMMARY -> new GetWalletSummaryCommand(arguments, channel);
+            case WALLET_OVERALL_SUMMARY -> new GetWalletOverallSummaryCommand(arguments, channel);
+            case INVALID -> throw new InvalidCommandException("Invalid command: " + command);
         };
     }
 
